@@ -19,6 +19,6 @@ app.get("*", (req, res) => {
     res.send("YOU ARE A STAR!");
 });
 
-app.listen(3000, ()=>{
+app.listen(3001, ()=>{
     console.log("Server has started!");
 });
