@@ -3,6 +3,9 @@ const app = mod_express();
 
 // "/" => Hi there
 
+let port = process.env.PORT ? process.env.PORT : 3001
+console.log(port)
+
 app.get("/", (req, res) => {
     res.send("Hi there!");
 });
@@ -19,6 +22,6 @@ app.get("*", (req, res) => {
     res.send("YOU ARE A STAR!");
 });
 
-app.listen(3001, ()=>{
+app.listen(port, ()=>{
     console.log("Server has started!");
 });
