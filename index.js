@@ -1,6 +1,9 @@
 const mod_express = require("express");
 const app = mod_express();
 
+const db = require('./db');
+app.db = db;
+
 // "/" => Hi there
 
 let port = process.env.PORT ? process.env.PORT : 3001
