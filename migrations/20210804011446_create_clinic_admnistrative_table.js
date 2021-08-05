@@ -13,5 +13,5 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-    return knex.schema.dropTable('admnistrative');
+    return knex.schema.dropTable('administrative');
 };
