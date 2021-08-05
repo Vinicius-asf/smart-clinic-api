@@ -1,5 +1,5 @@
 exports.up = function (knex) {
-    return knex.schema.createTable('admnistrative', table => {
+    return knex.schema.createTable('administrative', table => {
         table.increments('adm_id');
         table.integer('clinic_id').notNull();
         table.foreign('clinic_id').references('clinic.clinic_id').onDelete('RESTRICT');
@@ -13,5 +13,5 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-    return knex.schema.dropTable('administrative')
+    return knex.schema.dropTable('administrative');
 };

@@ -12,5 +12,5 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-    return knex.schema.dropTable('healthcare_professional')
+    return knex.schema.dropTable('healthcare_professional');
 };
