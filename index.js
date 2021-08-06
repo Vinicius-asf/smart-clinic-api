@@ -1,8 +1,19 @@
 const mod_express = require("express");
+const db = require('./db');
+const consign = require('consign')
+const body_parser = require('body-parser')
 const app = mod_express();
 
-const db = require('./db');
 app.db = db;
+
+app.use(body_parser.urlencoded({
+    extended: false
+}));
+app.use(body_parser.json());
+
+consign()
+    .then('./functions')
+    .into(app)
 
 // "/" => Hi there
 
@@ -62,6 +73,7 @@ app.get("/health/", (req, res) => {
 });
 
 app.get("/patient/:email", (req, res) => {
+    console.log(req.params)
     res.status(200).send("Successful request");
 });
 
@@ -70,7 +82,9 @@ app.patch("/patient/:email", (req, res) => {
 });
 
 app.post("/patient/", (req, res) => {
-    res.status(200).send("Successful request");
+    console.log(req.body)
+    // app.functions.patient.createPatient(req.body);
+    res.status(200).json("Successful request");
 });
 
 app.listen(port, ()=>{
