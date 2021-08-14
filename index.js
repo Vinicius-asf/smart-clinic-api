@@ -88,13 +88,22 @@ app.get("/health/", (req, res) => {
 
 app.get("/patient/:email", (req, res) => {
     // get patient with email
-    console.log(req.params)
-    res.status(200).send("Successful request");
+    try {
+        const patient = app.functions.patient.getPatientByEmail(req.params.email);
+        res.status(200).send(patient);
+    } catch (error) {
+        res.status(400).send("Unsuccessful request\n"+error);
+    }
 });
 
 app.patch("/patient/:email", (req, res) => {
     // update patient with email
-    res.status(200).send("Successful request");
+    try {
+        const patient = app.functions.patient.updatePatientByEmail(req.params.email,req.body);
+        res.status(200).send(patient);
+    } catch (error) {
+        res.status(400).send("Unsuccessful request\n"+error);
+    }
 });
 
 app.post("/patient/", (req, res) => {
@@ -106,7 +115,6 @@ app.post("/patient/", (req, res) => {
     } catch (error) {
         res.status(400).send("Unsuccessful request\n"+error);
     }
-    // res.status(200).json("Successful request");
 });
 
 app.listen(port, ()=>{
