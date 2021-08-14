@@ -31,7 +31,7 @@ module.exports = app => {
         // app.db('appointment').where({appointment_id}).del(['appointment_id', 'patient_email'])
         app.db('appointment').where({appointment_id})
         .then(queryResult => {
-            app.db('appointment').where({appointment_id}).update({...queryResult,deleted_at=new Date()})
+            app.db('appointment').where({appointment_id}).update({...queryResult,deleted_at:new Date()})
             .then(updateResult => {
                 return updateResult;
             })

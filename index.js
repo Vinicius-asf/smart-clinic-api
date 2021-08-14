@@ -15,8 +15,6 @@ consign()
     .then('./functions')
     .into(app)
 
-// "/" => Hi there
-
 let port = process.env.PORT ? process.env.PORT : 3001
 console.log(port)
 
@@ -144,6 +142,16 @@ app.get("/health/:crm", (req, res) => {
     }
 });
 
+app.get("/health/:crm/appointment", (req, res) => {
+    // get health worker appointment by credential (crm)
+    // try {
+    //     const professional = app.functions.health.getHealthProfessionalByCredential(req.params.crm);
+    //     res.status(200).json(professional);
+    // } catch (error) {
+    //     res.status(400).send("Unsuccessful request\n"+error);
+    // }
+});
+
 app.get("/health/", (req, res) => {
     // get all health workers
     try {
@@ -193,6 +201,10 @@ app.post("/patient/", (req, res) => {
     } catch (error) {
         res.status(400).send("Unsuccessful request\n"+error);
     }
+});
+
+app.get("/patient/:email/appointment", (req, res) => {
+    // get all appointments from patient
 });
 
 app.listen(port, ()=>{
