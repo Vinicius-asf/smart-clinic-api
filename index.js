@@ -82,9 +82,14 @@ app.patch("/patient/:email", (req, res) => {
 });
 
 app.post("/patient/", (req, res) => {
-    console.log(req.body)
-    // app.functions.patient.createPatient(req.body);
-    res.status(200).json("Successful request");
+    // console.log(req.body)
+    try {
+        const patient = app.functions.patient.createPatient(req.body);
+        res.status(200).send(patient);
+    } catch (error) {
+        res.status(400).send("Unsuccessful request\n"+error);
+    }
+    // res.status(200).json("Successful request");
 });
 
 app.listen(port, ()=>{
