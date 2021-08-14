@@ -51,18 +51,36 @@ app.post("/appointment/:id/exams", (req, res) => {
 });
 
 app.get("/clinic/", (req, res) => {
-    // get all clinics info
+    // get all clinics name and id
+    try {
+        const clinics = app.functions.clinic.getAllClinics();
+        res.status(200).send(clinics);
+    } catch (error) {
+        res.status(400).send("Unsuccessful request\n"+error);
+    }
     res.status(200).send("Successful request");
 });
 
 app.get("/clinic/:id", (req, res) => {
     // get specific clinic info
-    res.status(200).send("Successful request");
+    try {
+        const clinic_id = req.params.id;
+        const clinic = app.functions.clinic.getClinicInformation(clinic_id);
+        res.status(200).send(clinic);
+    } catch (error) {
+        res.status(400).send("Unsuccessful request\n"+error);
+    }
 });
 
 app.get("/clinic/:id/appointment", (req, res) => {
     // get all appointments from specific clinic
-    res.status(200).send("Successful request");
+    try {
+        const clinic_id = req.params.id;
+        const clinic_appointments = app.functions.clinic.getClinicAppointments(clinic_id);
+        res.status(200).send(clinic_appointments);
+    } catch (error) {
+        res.status(400).send("Unsuccessful request\n"+error);
+    }
 });
 
 app.post("/clinic/:id/patient", (req, res) => {
@@ -73,7 +91,13 @@ app.post("/clinic/:id/patient", (req, res) => {
 
 app.get("/clinic/:id/patient", (req, res) => {
     // get all patients related to a specific clinic
-    res.status(200).send("Successful request");
+    try {
+        const clinic_id = req.params.id;
+        const clinic_patients = app.functions.clinic.getAllClinicPatients(clinic_id);
+        res.status(200).send(clinic_patients);
+    } catch (error) {
+        res.status(400).send("Unsuccessful request\n"+error);
+    }
 });
 
 app.get("/health/:crm", (req, res) => {
