@@ -102,23 +102,54 @@ app.get("/clinic/:id/patient", (req, res) => {
 
 app.get("/health/:crm", (req, res) => {
     // get health worker by credential (crm)
-    res.status(200).send("Successful request");
+    try {
+        const professional = app.functions.health.getHealthProfessionalByCredential(req.params.crm);
+        res.status(200).send(professional);
+    } catch (error) {
+        res.status(400).send("Unsuccessful request\n"+error);
+    }
+    // res.status(200).send("Successful request");
 });
 
 app.get("/health/", (req, res) => {
     // get all health workers
-    res.status(200).send("Successful request");
+    try {
+        const professionals = app.functions.health.getAllHealthProfessional();
+        res.status(200).send(professionals);
+    } catch (error) {
+        res.status(400).send("Unsuccessful request\n"+error);
+    }
+    // res.status(200).send("Successful request");
+});
+
+app.post("/health/", (req, res) => {
+    // create health worker
+    try {
+        const professional = app.functions.health.createHealthProfessional(req.body);
+        res.status(200).send(professional);
+    } catch (error) {
+        res.status(400).send("Unsuccessful request\n"+error);
+    }
 });
 
 app.get("/patient/:email", (req, res) => {
     // get patient with email
-    console.log(req.params)
-    res.status(200).send("Successful request");
+    try {
+        const patient = app.functions.patient.getPatientByEmail(req.params.email);
+        res.status(200).send(patient);
+    } catch (error) {
+        res.status(400).send("Unsuccessful request\n"+error);
+    }
 });
 
 app.patch("/patient/:email", (req, res) => {
     // update patient with email
-    res.status(200).send("Successful request");
+    try {
+        const patient = app.functions.patient.updatePatientByEmail(req.params.email,req.body);
+        res.status(200).send(patient);
+    } catch (error) {
+        res.status(400).send("Unsuccessful request\n"+error);
+    }
 });
 
 app.post("/patient/", (req, res) => {
@@ -130,7 +161,6 @@ app.post("/patient/", (req, res) => {
     } catch (error) {
         res.status(400).send("Unsuccessful request\n"+error);
     }
-    // res.status(200).json("Successful request");
 });
 
 app.listen(port, ()=>{
