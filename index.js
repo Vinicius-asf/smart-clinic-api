@@ -93,35 +93,32 @@ app.get("/clinic/", (req, res) => {
     .catch(error => {
         res.status(400).send(error);
     })
-    // try {
-    //     const clinics = await app.functions.clinic.getAllClinics();
-    //     console.log(clinics);
-    //     res.status(200).json(clinics);
-    // } catch (error) {
-    //     res.status(400).send("Unsuccessful request\n"+error);
-    // }
 });
 
 app.get("/clinic/:id", (req, res) => {
     // get specific clinic info
-    try {
-        const clinic_id = req.params.id;
-        const clinic = app.functions.clinic.getClinicInformation(clinic_id);
-        res.status(200).json(clinic);
-    } catch (error) {
-        res.status(400).send("Unsuccessful request\n"+error);
-    }
+    const clinic_id = req.params.id;
+    app.functions.clinic.getClinicInformation(clinic_id)
+    .then(result => {
+        console.log(result);
+        res.status(200).json(result);
+    })
+    .catch(error => {
+        res.status(400).send(error);
+    })
 });
 
 app.get("/clinic/:id/appointment", (req, res) => {
     // get all appointments from specific clinic
-    try {
-        const clinic_id = req.params.id;
-        const clinic_appointments = app.functions.clinic.getClinicAppointments(clinic_id);
-        res.status(200).json(clinic_appointments);
-    } catch (error) {
-        res.status(400).send("Unsuccessful request\n"+error);
-    }
+    const clinic_id = req.params.id;
+    app.functions.clinic.getClinicAppointments(clinic_id)
+    .then(result => {
+        console.log(result);
+        res.status(200).json(result);
+    })
+    .catch(error => {
+        res.status(400).send(error);
+    })
 });
 
 app.post("/clinic/:id/patient", (req, res) => {
@@ -132,53 +129,65 @@ app.post("/clinic/:id/patient", (req, res) => {
 
 app.get("/clinic/:id/patient", (req, res) => {
     // get all patients related to a specific clinic
-    try {
-        const clinic_id = req.params.id;
-        const clinic_patients = app.functions.clinic.getAllClinicPatients(clinic_id);
-        res.status(200).json(clinic_patients);
-    } catch (error) {
-        res.status(400).send("Unsuccessful request\n"+error);
-    }
+    const clinic_id = req.params.id;
+    app.functions.clinic.getAllClinicPatients(clinic_id)
+    .then(result => {
+        console.log(result);
+        res.status(200).json(result);
+    })
+    .catch(error => {
+        res.status(400).send(error);
+    })
 });
 
 app.get("/health/:crm", (req, res) => {
     // get health worker by credential (crm)
-    try {
-        const professional = app.functions.health.getHealthProfessionalByCredential(req.params.crm);
-        res.status(200).json(professional);
-    } catch (error) {
-        res.status(400).send("Unsuccessful request\n"+error);
-    }
+    const crm = req.params.crm;
+    app.functions.health.getHealthProfessionalByCredential(crm)
+    .then(result => {
+        console.log(result);
+        res.status(200).json(result);
+    })
+    .catch(error => {
+        res.status(400).send(error);
+    })
 });
 
 app.get("/health/:crm/appointment", (req, res) => {
     // get health worker appointment by credential (crm)
-    try {
-        const appointments = app.functions.health.getHealthProfessionalAppointments(req.params.crm);
-        res.status(200).json(appointments);
-    } catch (error) {
-        res.status(400).send("Unsuccessful request\n"+error);
-    }
+    const crm = req.params.crm;
+    app.functions.health.getHealthProfessionalAppointments(crm)
+    .then(result => {
+        console.log(result);
+        res.status(200).json(result);
+    })
+    .catch(error => {
+        res.status(400).send(error);
+    })
 });
 
 app.get("/health/", (req, res) => {
     // get all health workers
-    try {
-        const professionals = app.functions.health.getAllHealthProfessional();
-        res.status(200).json(professionals);
-    } catch (error) {
-        res.status(400).send("Unsuccessful request\n"+error);
-    }
+    app.functions.health.getAllHealthProfessional()
+    .then(result => {
+        console.log(result);
+        res.status(200).json(result);
+    })
+    .catch(error => {
+        res.status(400).send(error);
+    })
 });
 
 app.post("/health/", (req, res) => {
     // create health worker
-    try {
-        const professional = app.functions.health.createHealthProfessional(req.body);
-        res.status(200).json(professional);
-    } catch (error) {
-        res.status(400).send("Unsuccessful request\n"+error);
-    }
+    app.functions.health.createHealthProfessional(req.body)
+    .then(result => {
+        console.log(result);
+        res.status(200).json(result);
+    })
+    .catch(error => {
+        res.status(400).send(error);
+    })
 });
 
 app.get("/patient/:email", (req, res) => {
