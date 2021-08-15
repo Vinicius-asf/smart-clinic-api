@@ -35,9 +35,21 @@ module.exports = app => {
         })
     }
 
+    // get health worker appointment by credential (crm)
+    const getHealthProfessionalAppointments = (credential) => {
+        app.db('appointment').where({credential})
+        .then( querryResult => {
+            return querryResult;
+        })
+        .catch(err=>{
+            throw Error('error in fetching data\n'+err);
+        });
+    }
+
     return {
         createHealthProfessional,
         getAllHealthProfessional,
-        getHealthProfessionalByCredential
+        getHealthProfessionalByCredential,
+        getHealthProfessionalAppointments,
     }
 }
