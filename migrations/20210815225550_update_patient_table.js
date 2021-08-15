@@ -12,5 +12,5 @@ exports.down = function(knex) {
         table.dropColumn('birth_date');
         table.dropColumn('weight');
         table.dropColumn('height');
-    })
+    });
 };
