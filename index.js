@@ -205,6 +205,13 @@ app.post("/patient/", (req, res) => {
 
 app.get("/patient/:email/appointment", (req, res) => {
     // get all appointments from patient
+    try {
+        const email = req.body.email;
+        const appointments = app.functions.patient.getAllPatientAppointmentsByEmail(email);
+        res.status(200).json(appointments);
+    } catch (error) {
+        res.status(400).send("Unsuccessful request\n"+error);
+    }
 });
 
 app.listen(port, ()=>{

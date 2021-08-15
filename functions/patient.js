@@ -35,10 +35,21 @@ module.exports = app => {
         .catch(err => {throw Error('error in updating patient\n'+err);});
     }
 
+    const getAllPatientAppointmentsByEmail = (email) => {
+        app.db('appointment').where('patient_email', email)
+        .then(queryResult => {
+            return queryResult;
+        })
+        .catch(err => {
+            throw Error('error in get all patient appointments\n'+err)
+        })
+    }
+
     return {
         createPatient,
         getAllPatients,
         getPatientByEmail,
         updatePatientByEmail,
+        getAllPatientAppointmentsByEmail
     }
 }
