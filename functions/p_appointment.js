@@ -34,34 +34,39 @@ module.exports = app => {
     }
 
     const deleteAppointment = (appointment_id) => {
-        // app.db('appointment').where({appointment_id}).del(['appointment_id', 'patient_email'])
-        app.db('appointment').where({appointment_id})
-        .then(queryResult => {
-            app.db('appointment').where({appointment_id}).update({...queryResult,deleted_at:new Date()})
-            .then(updateResult => {
-                return updateResult;
+        return new Promise((resolve,reject)=>{
+            app.db('appointment').where({appointment_id})
+            .then(queryResult => {
+                app.db('appointment').where({appointment_id}).update({...queryResult,deleted_at:new Date()})
+                .then(updateResult => {
+                    resolve(updateResult);
+                })
+                .catch(err => {
+                    reject(Error('error in deleting appointment\n'+err));
+                })
             })
-            .catch(err => {
-                throw Error('error in deleting appointment\n'+err);
-            })
+            .catch(err => {reject(Error('error in fetching appointment\n'+err));});
         })
-        .catch(err => {throw Error('error in fetching appointment\n'+err);});
     }
 
     const getAppointmentExams = (appointment_id) => {
-        app.db('exam').where({appointment_id})
-        .then(queryResult => {
-            return queryResult;
+        return new Promise((resolve,reject)=>{
+            app.db('exam').where({appointment_id})
+            .then(queryResult => {
+                resolve(queryResult);
+            })
+            .catch(err => {reject(Error('error in fetching exams\n'+err));});
         })
-        .catch(err => {throw Error('error in fetching exams\n'+err);});
     }
 
     const createAppointmentExam = (exam) => {
-        app.db('exam').insert(exam,['exam_id','patient_email'])
-        .then(insertResult => {
-            return insertResult;
+        return new Promise((resolve,reject)=>{
+            app.db('exam').insert(exam,['exam_id','patient_email'])
+            .then(insertResult => {
+                resolve(insertResult);
+            })
+            .catch(err => {reject(Error('error in creating exam\n'+err));});
         })
-        .catch(err => {throw Error('error in creating exam\n'+err);});
     }
 
     return {
