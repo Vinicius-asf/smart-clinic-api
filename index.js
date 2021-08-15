@@ -46,13 +46,15 @@ app.get("/appointment/:id", (req, res) => {
 
 app.patch("/appointment/:id", (req, res) => {
     // update specific appointment
-    try {
-        const appointment_id = req.params.id;
-        const appointment = app.functions.p_appointment.updateAppointmentById(appointment_id,req.body);
+    const appointment_id = req.params.id;
+    app.functions.p_appointment.updateAppointmentById(appointment_id,req.body)
+    .then(result=>{
+        const appointment = result;
         res.status(200).json(appointment);
-    } catch (error) {
+    })
+    .catch(error=>{
         res.status(400).send("Unsuccessful request\n"+error);
-    }
+    })
 });
 
 app.delete("/appointment/:id", (req, res) => {

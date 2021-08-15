@@ -24,11 +24,13 @@ module.exports = app => {
     }
 
     const updateAppointmentById = (appointment_id,newData) => {
-        app.db('appointment').where({appointment_id}).update(newData)
-        .then(queryResult => {
-            return queryResult;
+        return new Promise((resolve,reject) => {
+            app.db('appointment').where({appointment_id}).update(newData,'appointment_id')
+            .then(queryResult => {
+                resolve(queryResult);
+            })
+            .catch(err => {reject(Error('error in updating appointment\n'+err));});
         })
-        .catch(err => {throw Error('error in updating appointment\n'+err);});
     }
 
     const deleteAppointment = (appointment_id) => {
