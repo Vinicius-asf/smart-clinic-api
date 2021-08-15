@@ -46,10 +46,21 @@ module.exports = app => {
         });
     }
 
+    const insertAreaToProfessional = (area_id,credential) => {
+        app.db('professional_area').insert({credential,area_id},'credential')
+        .then(insertResult => {
+            return insertResult;
+        })
+        .catch(err => {
+            throw Error('error in inserting data\n'+err);
+        });
+    }
+
     return {
         createHealthProfessional,
         getAllHealthProfessional,
         getHealthProfessionalByCredential,
         getHealthProfessionalAppointments,
+        insertAreaToProfessional,
     }
 }
