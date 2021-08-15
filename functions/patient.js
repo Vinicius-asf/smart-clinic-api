@@ -17,6 +17,7 @@ module.exports = app => {
         return new Promise((resolve,reject)=>{
             app.db('patient')
             .then(queryResult => {
+                console.log('querry:\n'+queryResult);
                 resolve(queryResult);
             })
             .catch(err => {reject(Error('error in fetching data\n'+err));});
