@@ -10,7 +10,7 @@ module.exports = app => {
     }
 
     const getAllClinics = () => {
-        return Promise((resolve,reject => {
+        return Promise((resolve,reject) => {
             app.db('clinic').select('clinic_id', 'name').from('clinic')
             .then(queryResult => {
                 console.log('qr\n'+queryResult);
@@ -20,7 +20,7 @@ module.exports = app => {
                 reject(Error('error in get all clinics\n'+err))
                 // throw 
             })
-        }))
+        })
     }
     
     const getClinicAppointments = (clinic_id) => {
