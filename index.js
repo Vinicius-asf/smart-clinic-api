@@ -83,10 +83,10 @@ app.post("/appointment/:id/exams", (req, res) => {
     }
 });
 
-app.get("/clinic/", (req, res) => {
+app.get("/clinic/", async (req, res) => {
     // get all clinics name and id
     try {
-        const clinics = app.functions.clinic.getAllClinics();
+        const clinics = await app.functions.clinic.getAllClinics();
         console.log(clinics);
         res.status(200).json(clinics);
     } catch (error) {
