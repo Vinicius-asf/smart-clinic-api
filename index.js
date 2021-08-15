@@ -33,13 +33,15 @@ app.post("/appointment", (req, res) => {
 
 app.get("/appointment/:id", (req, res) => {
     // get specific appointment info
-    try {
-        const appointment_id = req.params.id;
-        const appointment = app.functions.p_appointment.getAppointmentInformation(appointment_id);
+    const appointment_id = req.params.id;
+    app.functions.p_appointment.getAppointmentInformation(appointment_id)
+    .then(result=>{
+        const appointment = result;
         res.status(200).json(appointment);
-    } catch (error) {
+    })
+    .catch(error=>{
         res.status(400).send("Unsuccessful request\n"+error);
-    }
+    })
 });
 
 app.patch("/appointment/:id", (req, res) => {

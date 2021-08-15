@@ -12,13 +12,15 @@ module.exports = app => {
     }
 
     const getAppointmentInformation = (appointment_id) => {
-        app.db('appointment').where('appointment_id', appointment_id).first()
-        .then(queryResult => {
-            return queryResult;
-        })
-        .catch(err =>{
-            throw Error('error in get appointment information\n'+err)
-        })
+        return new Promise((resolve,reject) => {
+            app.db('appointment').where('appointment_id', appointment_id).first()
+            .then(queryResult => {
+                resolve(queryResult);
+            })
+            .catch(err =>{
+                reject(Error('error in get appointment information\n'+err));
+            })
+        });
     }
 
     const updateAppointmentById = (appointment_id,newData) => {
