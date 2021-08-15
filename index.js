@@ -206,7 +206,9 @@ app.post("/health/", (req, res) => {
 app.get("/patient/:email", (req, res) => {
     // get patient with email
     try {
-        const patient = app.functions.patient.getPatientByEmail(req.params.email);
+        const email = req.params.email;
+        console.log(email);
+        const patient = app.functions.patient.getPatientByEmail(email);
         res.status(200).json(patient);
     } catch (error) {
         res.status(400).send("Unsuccessful request\n"+error);
