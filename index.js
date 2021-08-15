@@ -20,34 +20,41 @@ console.log(port)
 
 app.post("/appointment", (req, res) => {
     // create appointment
-    try {
-        const appointment = app.functions.p_appointment.createAppointment(req.body);
+    app.functions.p_appointment.createAppointment(req.body)
+    .then(result=>{
+        const appointment = result;
+        console.log(appointment)
         res.status(200).json(appointment);
-    } catch (error) {
+    })
+    .catch(error=>{
         res.status(400).send("Unsuccessful request\n"+error);
-    }
+    });
 });
 
 app.get("/appointment/:id", (req, res) => {
     // get specific appointment info
-    try {
-        const appointment_id = req.params.id;
-        const appointment = app.functions.p_appointment.getAppointmentInformation(appointment_id);
+    const appointment_id = req.params.id;
+    app.functions.p_appointment.getAppointmentInformation(appointment_id)
+    .then(result=>{
+        const appointment = result;
         res.status(200).json(appointment);
-    } catch (error) {
+    })
+    .catch(error=>{
         res.status(400).send("Unsuccessful request\n"+error);
-    }
+    })
 });
 
 app.patch("/appointment/:id", (req, res) => {
     // update specific appointment
-    try {
-        const appointment_id = req.params.id;
-        const appointment = app.functions.p_appointment.updateAppointmentById(appointment_id,req.body);
+    const appointment_id = req.params.id;
+    app.functions.p_appointment.updateAppointmentById(appointment_id,req.body)
+    .then(result=>{
+        const appointment = result;
         res.status(200).json(appointment);
-    } catch (error) {
+    })
+    .catch(error=>{
         res.status(400).send("Unsuccessful request\n"+error);
-    }
+    })
 });
 
 app.delete("/appointment/:id", (req, res) => {

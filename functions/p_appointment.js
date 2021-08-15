@@ -1,30 +1,36 @@
 module.exports = app => {
     const createAppointment = (appointment) => {
-        app.db('appointment').insert({...appointment})
-        .then(insertResult => {
-            return insertResult;
-        })
-        .catch(err =>{
-            throw Error('error in creating new appointment\n'+err)
-        })
+        return new Promise((resolve,reject)=>{
+            app.db('appointment').insert({...appointment},'appointment_id')
+            .then(insertResult => {
+                resolve(appointment_id);
+            })
+            .catch(err =>{
+                reject(Error('error in creating new appointment\n'+err));
+            });
+        });
     }
 
     const getAppointmentInformation = (appointment_id) => {
-        app.db('appointment').where('appointment_id', appointment_id).first()
-        .then(queryResult => {
-            return queryResult;
-        })
-        .catch(err =>{
-            throw Error('error in get appointment information\n'+err)
-        })
+        return new Promise((resolve,reject) => {
+            app.db('appointment').where('appointment_id', appointment_id).first()
+            .then(queryResult => {
+                resolve(queryResult);
+            })
+            .catch(err =>{
+                reject(Error('error in get appointment information\n'+err));
+            })
+        });
     }
 
     const updateAppointmentById = (appointment_id,newData) => {
-        app.db('appointment').where({appointment_id}).update(newData)
-        .then(queryResult => {
-            return queryResult;
+        return new Promise((resolve,reject) => {
+            app.db('appointment').where({appointment_id}).update(newData,'appointment_id')
+            .then(queryResult => {
+                resolve(queryResult);
+            })
+            .catch(err => {reject(Error('error in updating appointment\n'+err));});
         })
-        .catch(err => {throw Error('error in updating appointment\n'+err);});
     }
 
     const deleteAppointment = (appointment_id) => {
