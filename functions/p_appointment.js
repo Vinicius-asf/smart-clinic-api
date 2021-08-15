@@ -1,12 +1,14 @@
 module.exports = app => {
     const createAppointment = (appointment) => {
-        app.db('appointment').insert({...appointment})
-        .then(insertResult => {
-            return insertResult;
-        })
-        .catch(err =>{
-            throw Error('error in creating new appointment\n'+err)
-        })
+        return new Promise((resolve,reject)=>{
+            app.db('appointment').insert({...appointment},'appointment_id')
+            .then(insertResult => {
+                resolve(appointment_id);
+            })
+            .catch(err =>{
+                reject(Error('error in creating new appointment\n'+err));
+            });
+        });
     }
 
     const getAppointmentInformation = (appointment_id) => {

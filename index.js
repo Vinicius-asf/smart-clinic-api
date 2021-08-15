@@ -20,12 +20,15 @@ console.log(port)
 
 app.post("/appointment", (req, res) => {
     // create appointment
-    try {
-        const appointment = app.functions.p_appointment.createAppointment(req.body);
+    app.functions.p_appointment.createAppointment(req.body)
+    .then(result=>{
+        const appointment = result;
+        console.log(appointment)
         res.status(200).json(appointment);
-    } catch (error) {
+    })
+    .catch(error=>{
         res.status(400).send("Unsuccessful request\n"+error);
-    }
+    });
 });
 
 app.get("/appointment/:id", (req, res) => {
