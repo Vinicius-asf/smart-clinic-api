@@ -21,7 +21,7 @@ console.log(port)
 app.post("/appointment", (req, res) => {
     // create appointment
     try {
-        const appointment = app.functions.appointment.createAppointment(req.body);
+        const appointment = app.functions.apointment.createAppointment(req.body);
         res.status(200).json(appointment);
     } catch (error) {
         res.status(400).send("Unsuccessful request\n"+error);
@@ -32,7 +32,7 @@ app.get("/appointment/:id", (req, res) => {
     // get specific appointment info
     try {
         const appointment_id = req.params.id;
-        const appointment = app.functions.appointment.getAppointmentInformation(appointment_id);
+        const appointment = app.functions.apointment.getAppointmentInformation(appointment_id);
         res.status(200).json(appointment);
     } catch (error) {
         res.status(400).send("Unsuccessful request\n"+error);
@@ -43,7 +43,7 @@ app.patch("/appointment/:id", (req, res) => {
     // update specific appointment
     try {
         const appointment_id = req.params.id;
-        const appointment = app.functions.appointment.updateAppointmentById(appointment_id,req.body);
+        const appointment = app.functions.apointment.updateAppointmentById(appointment_id,req.body);
         res.status(200).json(appointment);
     } catch (error) {
         res.status(400).send("Unsuccessful request\n"+error);
@@ -54,7 +54,7 @@ app.delete("/appointment/:id", (req, res) => {
     // delete specific appointment
     try {
         const appointment_id = req.params.id;
-        const appointment = app.functions.appointment.deleteAppointment(appointment_id);
+        const appointment = app.functions.apointment.deleteAppointment(appointment_id);
         res.status(200).json(appointment);
     } catch (error) {
         res.status(400).send("Unsuccessful request\n"+error);
@@ -65,7 +65,7 @@ app.get("/appointment/:id/exams", (req, res) => {
     // get specific appointment exams
     try {
         const appointment_id = req.params.id;
-        const exams = app.functions.appointment.getAppointmentExams(appointment_id);
+        const exams = app.functions.apointment.getAppointmentExams(appointment_id);
         res.status(200).json(exams);
     } catch (error) {
         res.status(400).send("Unsuccessful request\n"+error);
@@ -76,7 +76,7 @@ app.post("/appointment/:id/exams", (req, res) => {
     // create specific appointment exam
     try {
         // const appointment_id = req.params.id;
-        const exam = app.functions.appointment.createAppointmentExam(req.body);
+        const exam = app.functions.apointment.createAppointmentExam(req.body);
         res.status(200).json(exam);
     } catch (error) {
         res.status(400).send("Unsuccessful request\n"+error);
