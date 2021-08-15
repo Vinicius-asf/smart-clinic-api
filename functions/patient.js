@@ -1,47 +1,57 @@
 module.exports = app => {
     const createPatient = (patient) => {
-        app.db('patient').insert({...patient},'email')
-        .then(insertResult => {
-            return insertResult;
-        })
-        .catch(err =>{
-            // console.log(err)
-            throw Error('error in creating patient\n'+err);
-            // return err
+        return new Promise((resolve,reject)=>{            
+            app.db('patient').insert({...patient},'email')
+            .then(insertResult => {
+                resolve(insertResult);
+            })
+            .catch(err =>{
+                // console.log(err)
+                reject(Error('error in creating patient\n'+err));
+                // return err
+            })
         })
     }
 
     const getAllPatients = () => {
-        app.db('patients')
-        .then(queryResult => {
-            return queryResult;
+        return new Promise((resolve,reject)=>{
+            app.db('patients')
+            .then(queryResult => {
+                resolve(queryResult);
+            })
+            .catch(err => {reject(Error('error in fetching data\n'+err));});
         })
-        .catch(err => {throw Error('error in fetching data\n'+err);});
     }
 
     const getPatientByEmail = (email) => {
-        app.db('patients').where({email}).first()
-        .then(queryResult => {
-            return queryResult;
+        return new Promise((resolve,reject)=>{
+            app.db('patients').where({email}).first()
+            .then(queryResult => {
+                resolve(queryResult);
+            })
+            .catch(err => {reject(Error('error in fetching data\n'+err));});
         })
-        .catch(err => {throw Error('error in fetching data\n'+err);});
     }
 
     const updatePatientByEmail = (email,newData) => {
-        app.db('patients').where({email}).update(newData)
-        .then(queryResult => {
-            return queryResult;
+        return new Promise((resolve,reject)=>{
+            app.db('patients').where({email}).update({...newData,update_at:new Date()})
+            .then(queryResult => {
+                resolve(queryResult);
+            })
+            .catch(err => {reject(Error('error in updating patient\n'+err));});
         })
-        .catch(err => {throw Error('error in updating patient\n'+err);});
     }
 
     const getAllPatientAppointmentsByEmail = (email) => {
-        app.db('appointment').where('patient_email', email)
-        .then(queryResult => {
-            return queryResult;
-        })
-        .catch(err => {
-            throw Error('error in get all patient appointments\n'+err)
+        return new Promise((resolve,reject)=>{
+            app.db('appointment').where('patient_email', email)
+            .then(queryResult => {
+                resolve(queryResult);
+            })
+            .catch(err => {
+                reject(Error('error in get all patient appointments\n'+err));
+            })
         })
     }
 
