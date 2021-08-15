@@ -83,15 +83,23 @@ app.post("/appointment/:id/exams", (req, res) => {
     }
 });
 
-app.get("/clinic/", async (req, res) => {
+app.get("/clinic/", (req, res) => {
     // get all clinics name and id
-    try {
-        const clinics = await app.functions.clinic.getAllClinics();
-        console.log(clinics);
-        res.status(200).json(clinics);
-    } catch (error) {
-        res.status(400).send("Unsuccessful request\n"+error);
-    }
+    app.functions.clinic.getAllClinics()
+    .then(result => {
+        console.log(result);
+        res.status(200).json(result);
+    })
+    .catch(error => {
+        res.status(400).send(error);
+    })
+    // try {
+    //     const clinics = await app.functions.clinic.getAllClinics();
+    //     console.log(clinics);
+    //     res.status(200).json(clinics);
+    // } catch (error) {
+    //     res.status(400).send("Unsuccessful request\n"+error);
+    // }
 });
 
 app.get("/clinic/:id", (req, res) => {

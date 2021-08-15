@@ -10,14 +10,17 @@ module.exports = app => {
     }
 
     const getAllClinics = () => {
-        app.db('clinic').select('clinic_id', 'name').from('clinic')
-        .then(queryResult => {
-            console.log('qr\n'+queryResult);
-            return queryResult;
-        })
-        .catch(err => {
-            throw Error('error in get all clinics\n'+err)
-        })
+        return Promise((resolve,reject => {
+            app.db('clinic').select('clinic_id', 'name').from('clinic')
+            .then(queryResult => {
+                console.log('qr\n'+queryResult);
+                resolve(queryResult);
+            })
+            .catch(err => {
+                reject(Error('error in get all clinics\n'+err))
+                // throw 
+            })
+        }))
     }
     
     const getClinicAppointments = (clinic_id) => {
