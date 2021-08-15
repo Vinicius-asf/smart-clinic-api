@@ -15,7 +15,7 @@ module.exports = app => {
 
     const getAllPatients = () => {
         return new Promise((resolve,reject)=>{
-            app.db('patients')
+            app.db('patient')
             .then(queryResult => {
                 resolve(queryResult);
             })
@@ -25,7 +25,7 @@ module.exports = app => {
 
     const getPatientByEmail = (email) => {
         return new Promise((resolve,reject)=>{
-            app.db('patients').where({email}).first()
+            app.db('patient').where({email}).first()
             .then(queryResult => {
                 resolve(queryResult);
             })
@@ -35,7 +35,7 @@ module.exports = app => {
 
     const updatePatientByEmail = (email,newData) => {
         return new Promise((resolve,reject)=>{
-            app.db('patients').where({email}).update({...newData,update_at:new Date()})
+            app.db('patient').where({email}).update({...newData,update_at:new Date()})
             .then(queryResult => {
                 resolve(queryResult);
             })
