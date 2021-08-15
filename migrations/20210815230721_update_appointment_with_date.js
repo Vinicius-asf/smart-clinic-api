@@ -1,7 +1,7 @@
 
 exports.up = function(knex) {
     return knex.schema.table('appointment', table => {
-        table.timestamp('appointment_date');
+        table.timestamp('appointment_date').notNull();
     });
 };
 
