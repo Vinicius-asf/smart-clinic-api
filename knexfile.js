@@ -2,6 +2,11 @@
 
 module.exports = {
   client: 'pg',
+  development:{
+    seeds:{
+      directory: './seeds'
+    }
+  },
   connection: process.env.DATABASE_URL,
   pool: {
     min: 2,
@@ -16,8 +21,13 @@ module.exports = {
 
 // module.exports = {
 //     client: 'pg',
+//     development:{
+//       seeds:{
+//         directory: './seeds'
+//       }
+//     },
 //     connection: {
-//       database: 'postgres',
+//       database: 'smart_clinic_db',
 //       user: 'postgres',
 //       password: '5sWISuDZ2o4LNMSbGtxP'
 //     },
