@@ -87,6 +87,7 @@ app.get("/clinic/", (req, res) => {
     // get all clinics name and id
     try {
         const clinics = app.functions.clinic.getAllClinics();
+        console.log(clinics);
         res.status(200).json(clinics);
     } catch (error) {
         res.status(400).send("Unsuccessful request\n"+error);
