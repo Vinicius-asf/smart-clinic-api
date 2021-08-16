@@ -28,4 +28,20 @@ As rotas da API definidas para essa aplicação são:
 # app.get("/clinic/")
 * Pegar do banco todas as clinicas (id e nome)
 
+# app.get("/clinic/:id")
+* TO-DO
+
+# app.get("/clinic/:id/appointment")
+* Pegar do banco todas as consultas de uma clinica, informando o id dessa clinica
+* É enviado todas as informações da tabela 'appointment', mais o nome do paciente da consulta, nome do médico e sua credencial.
+
+# app.get("/clinic/:id/patient")
+* Pegar do banco todos os pacientes relacionados com uma clínica, informando o id dessa clínica.
+
+# app.get("/health/:crm")
+* Pegar do banco o nome e a credencial de um profissional da saúde específico. É necessária passar a chave primária (no caso, a credencial)
+* TO-DO: colocar a disponibilidade do profissional.
+
+
+
 
