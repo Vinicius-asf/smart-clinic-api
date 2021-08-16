@@ -1,7 +1,7 @@
 
 exports.up = function(knex) {
     return knex.schema.table('patient', table => {
-        table.timestamp('birth_date');
+        table.date('birth_date');
         table.string('weight');
         table.string('height');
     });
