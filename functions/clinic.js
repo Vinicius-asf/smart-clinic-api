@@ -28,6 +28,9 @@ module.exports = app => {
     const getClinicAppointments = (clinic_id) => {
         return new Promise((resolve, reject) => {
             app.db('appointment').where('clinic_id', clinic_id)
+            .join('patient', 'appointment.patient_email', '=', 'patient.email')
+            .join('healthcare_professional', 'appointment.credential', '=', 'healthcare_professional.credential')
+            .select('appointment.*', 'patient.name', 'healthcare_professional.name', 'healthcare_professional.credential')
             .then(queryResult => {
                 resolve(queryResult);
             })
