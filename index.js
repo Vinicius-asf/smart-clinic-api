@@ -2,10 +2,13 @@ const mod_express = require("express");
 const db = require('./db');
 const consign = require('consign')
 const body_parser = require('body-parser')
+const cors = require('cors')
+ 
 const app = mod_express();
 
 app.db = db;
 
+app.use(cors())
 app.use(body_parser.urlencoded({
     extended: false
 }));
