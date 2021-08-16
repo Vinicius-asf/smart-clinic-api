@@ -24,8 +24,10 @@ module.exports = app => {
     }
 
     const getHealthProfessionalByCredential = (credential) => {
+        // TO-DO: include the professional availability
         return new Promise((resolve, reject) => {
             app.db('healthcare_professional').where({credential}).first()
+            .select('name', 'credential')
             .then(queryResult => {
                 resolve(queryResult);
             })
