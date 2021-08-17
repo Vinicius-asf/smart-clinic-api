@@ -42,6 +42,17 @@ As rotas da API definidas para essa aplicação são:
 * Pegar do banco o nome e a credencial de um profissional da saúde específico. É necessária passar a chave primária (no caso, a credencial)
 * TO-DO: colocar a disponibilidade do profissional.
 
+# app.get("/health/:crm/appointment")
+* Pegar do banco todas consultas referentes a um único profissional, informando a credencial (crm) deste. Retorna os dados da consulta nomes do paciente e da clínica
+
+# app.get("/health/")
+* Pegar do banco as informações dos profissionais de saúde; retorna-se o nome, e-mail, credencial e a sua profissão de atuação
+
+# app.post("/health/")
+* Função para inserir no banco dados de um profissional de saúde
+
+
+
 
 
 
