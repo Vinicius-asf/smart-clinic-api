@@ -14,8 +14,23 @@ module.exports = app => {
     const getAppointmentInformation = (appointment_id) => {
         return new Promise((resolve,reject) => {
             app.db('appointment').where('appointment_id', appointment_id).first()
-            .then(queryResult => {
-                resolve(queryResult);
+            .then(appointment => {
+                app.db('patient').where('email',appointment.patient_email).first()
+                .select('name', 'birth_date', 'weight', 'height')
+                .then(patient => {
+                    app.db('clinic').where('clinic_id', appointment.clinic_id).first()
+                    .select('name', 'address')
+                    .then(clinic => {
+                        app.db('healthcare_professional').where('credential', appointment.credential).first()
+                        .select('name', 'credential')
+                        .then(healthcare_professional => {
+                            app.db('exam').where('appointment_id', appointment_id)
+                            .then(exams => {
+                                resolve({...appointment, patient:patient, clinic:clinic, healthcare_professional:healthcare_professional, exams:exams});
+                            })
+                        })
+                    })
+                })
             })
             .catch(err =>{
                 reject(Error('error in get appointment information\n'+err));

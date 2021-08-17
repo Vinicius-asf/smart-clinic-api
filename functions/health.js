@@ -14,6 +14,7 @@ module.exports = app => {
     const getAllHealthProfessional = () => {
         return new Promise((resolve, reject) => {
             app.db('healthcare_professional')
+            .select('name', 'credential', 'professional', 'email')
             .then(querryResult => {
                 resolve(querryResult);
             })
@@ -24,8 +25,10 @@ module.exports = app => {
     }
 
     const getHealthProfessionalByCredential = (credential) => {
+        // TO-DO: include the professional availability
         return new Promise((resolve, reject) => {
             app.db('healthcare_professional').where({credential}).first()
+            .select('name', 'credential')
             .then(queryResult => {
                 resolve(queryResult);
             })
@@ -39,8 +42,16 @@ module.exports = app => {
     const getHealthProfessionalAppointments = (credential) => {
         return new Promise((resolve, reject) => {
             app.db('appointment').where({credential})
-            .then(queryResult => {
-                resolve(queryResult);
+            .then(appointment => {
+                app.db('patient').where('email',appointment.patient_email).first()
+                .select('name')
+                .then(patient => {
+                    app.db('clinic').where('clinic_id', appointment.clinic_id).first()
+                    .select('name')
+                    .then(clinic => {
+                        resolve({...appointment, patient:patient, clinic:clinic});
+                    })
+                })
             })
             .catch(err => {
                 reject(Error('error in fetching data\n'+err))
