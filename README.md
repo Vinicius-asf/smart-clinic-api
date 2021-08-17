@@ -51,6 +51,15 @@ As rotas da API definidas para essa aplicação são:
 # app.post("/health/")
 * Função para inserir no banco dados de um profissional de saúde
 
+# app.get("/patient/:email")
+* Pegar do banco os dados específicos de um paciente através da chave primária (e-mail). Retorna todos os dados do paciente, menos a senha
+
+# app.patch("/patient/:email")
+* Atualizar no banco os dados de um paciente através da chave primária (e-mail). Deve-se passar no req.body os dados no formato esperado para o banco
+
+# app.post("/patient/)
+* Criar no banco os dados um paciente. Deve-se passar no req.body os dados no formato esperado para o banco
+
 
 
 
