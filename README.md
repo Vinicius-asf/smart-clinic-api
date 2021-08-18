@@ -6,6 +6,8 @@ As rotas da API definidas para essa aplicação são:
 1. e-mail paciente (chave primária da tabela "patient")
 2. id da clínica
 3. credencial do médico (chave primária da tabela "healthcare_professional")
+4. date - data da consulta (YYYY-MM-DD)
+5. time - horário da consulta (HH:MM:SS)
 
 # app.get("/appointment/:id")
 * Pegar do banco as informações sobre uma consulta.
@@ -43,13 +45,42 @@ As rotas da API definidas para essa aplicação são:
 * TO-DO: colocar a disponibilidade do profissional.
 
 # app.get("/health/:crm/appointment")
-* Pegar do banco todas consultas referentes a um único profissional, informando a credencial (crm) deste. Retorna os dados da consulta nomes do paciente e da clínica
+* Pegar do banco todas consultas referentes a um único profissional, informando a credencial (crm) deste. Retorna os dados da consulta, nomes do paciente e da clínica
 
 # app.get("/health/")
 * Pegar do banco as informações dos profissionais de saúde; retorna-se o nome, e-mail, credencial e a sua profissão de atuação
 
 # app.post("/health/")
 * Função para inserir no banco dados de um profissional de saúde
+* Não conta com a atualização de área de atuação ou especialidade
+
+# app.patch("/health/:crm") TO DO
+* Função para atualizar os dados do profissional da saúde
+* Não conta com a atualização de área de atuação ou especialidade
+
+# app.post("/health/:crm/area") TO DO
+* Função para atualizar a área de atuação de um profissional específico
+* Deleta os dados antigos
+* Deixar body como o exemplo abaixo:
+
+        {
+            area_id:[1,2,3] // ids das áreas de atuação
+        }
+
+# app.post("/health/:crm/specialty") TO DO
+* Função para atualizar a área de atuação de um profissional específico
+* Deleta os dados antigos
+* Deixar body como o exemplo abaixo:
+
+        {
+            specialty:[1,2,3] // ids das áreas de atuação
+        }
+
+# app.get("/specialty") TO DO
+* Função para pegar todas as especialidades armazenadas no sistema
+
+# app.get("/area") TO DO
+* Função para pegar todas as áreas de atuação armazenadas no sistema
 
 # app.get("/patient/:email")
 * Pegar do banco os dados específicos de um paciente através da chave primária (e-mail). Retorna todos os dados do paciente, menos a senha
