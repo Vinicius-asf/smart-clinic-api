@@ -56,10 +56,36 @@ module.exports = app => {
         });
     }
 
+    const addProfessionalToClinic = (credential,clinic_id) =>{
+        return new Promise ((resolve,reject) => {
+            app.db('clinics_healthcare_professional').insert({clinic_id,credential},['credential','clinic_id'])
+            .then(insertResult => {
+                resolve(insertResult);
+            })
+            .catch(err => {
+                reject(Error('error in connecting clinic and professional\n'+err));
+            })
+        })
+    }
+
+    const removeProfessionalfromClinic = (credential,clinic_id) =>{
+        return new Promise ((resolve,reject) => {
+            app.db('clinics_healthcare_professional').where({credential,clinic_id})
+            .update({credential,clinic_id,deleted_at:new Date.now()},['credential','clinic_id'])
+            .then(updateResult => {
+                resolve(updateResult);
+            })
+            .catch(err => {
+                reject(Error('error in removing professional from clinic\n'+err));
+            })
+        })
+    }
+
     return {
         getClinicInformation,
         getAllClinics,
         getClinicAppointments,
-        getAllClinicPatients
+        getAllClinicPatients,
+        addProfessionalToClinic,
     }
 }
