@@ -143,6 +143,19 @@ module.exports = app => {
         })
     }
 
+    const updateHealthProfessional = (professional) => {
+        return new Promise((resolve, reject) => {
+            app.db('healthcare_professional').where({credential:professional.crm})
+            .update(professional,'credential')
+            .then(updateResult => {
+                resolve(updateResult);
+            })
+            .catch(err => {
+                reject(Error('error in update professional data\n'+err));
+            });
+        })
+    }
+
     return {
         createHealthProfessional,
         getAllHealthProfessional,
