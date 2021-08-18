@@ -6,7 +6,7 @@ module.exports = app => {
                 resolve(insertResult);
             })
             .catch(err => {
-                reject(Error('error in creating healthcare professional\n'+err))
+                reject(Error('error in creating healthcare professional\n'+err));
             });
         });
     }
@@ -15,11 +15,11 @@ module.exports = app => {
         return new Promise((resolve, reject) => {
             app.db('healthcare_professional')
             .select('name', 'credential', 'professional', 'email')
-            .then(querryResult => {
-                resolve(querryResult);
+            .then(queryResult => {
+                resolve(queryResult);
             })
             .catch(err => {
-                reject(Error('error in fetching data\n'+err))
+                reject(Error('error in fetching data\n'+err));
             });
         });
     }
@@ -33,7 +33,7 @@ module.exports = app => {
                 resolve(queryResult);
             })
             .catch(err => {
-                reject(Error('error in fetching data\n'+err))
+                reject(Error('error in fetching data\n'+err));
             });
         });
     }
@@ -50,7 +50,7 @@ module.exports = app => {
             return appointments;
         }
         catch(err) {
-            throw Error('error in fetching data\n'+err)
+            throw Error('error in fetching data\n'+err);
         }
     }
 
@@ -62,7 +62,7 @@ module.exports = app => {
                 resolve(queryResult)
             })
             .catch(err => {
-                reject(Error('error in fetching data \n'+err))
+                reject(Error('error in fetching data \n'+err));
             });
         });
     }
@@ -74,7 +74,7 @@ module.exports = app => {
                 resolve(queryResult)
             })
             .catch(err => {
-                reject(Error('error in fetching data \n'+err))
+                reject(Error('error in fetching data \n'+err));
             });
         });
     }
@@ -86,7 +86,7 @@ module.exports = app => {
                 resolve(insertResult);
             })
             .catch(err => {
-                reject(Error('error in inserting data\n'+err))
+                reject(Error('error in inserting data\n'+err));
             });
         });
     }
@@ -98,7 +98,7 @@ module.exports = app => {
                 resolve(insertResult);
             })
             .catch(err => {
-                reject(Error('error in removing data\n'+err))
+                reject(Error('error in removing data\n'+err));
             });
         });
     }
@@ -110,7 +110,7 @@ module.exports = app => {
                 resolve(insertResult);
             })
             .catch(err => {
-                reject(Error('error in inserting data\n'+err))
+                reject(Error('error in inserting data\n'+err));
             });
         });
     }
@@ -122,9 +122,25 @@ module.exports = app => {
                 resolve(insertResult);
             })
             .catch(err => {
-                reject(Error('error in removing data\n'+err))
+                reject(Error('error in removing data\n'+err));
             });
         });
+    }
+
+    const getSpecialties = () => {
+        return new Promise((resolve, reject) => {
+            app.db('specialty')
+            .then(queryResult => resolve(queryResult))
+            .catch(err => reject(Error('error in fetching data\n'+err)));
+        })
+    }
+
+    const getAreas = () => {
+        return new Promise((resolve, reject) => {
+            app.db('area')
+            .then(queryResult => resolve(queryResult))
+            .catch(err => reject(Error('error in fetching data\n'+err)));
+        })
     }
 
     return {
@@ -136,5 +152,7 @@ module.exports = app => {
         removeAreaFromProfessional,
         insertSpecialtyToProfessional,
         removeSpecialtyFromProfessional,
+        getSpecialties,
+        getAreas,
     }
 }

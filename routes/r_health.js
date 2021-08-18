@@ -40,6 +40,26 @@ module.exports = app => {
         })
     });
 
+    app.get("/specialty", (req, res) => {
+        // get all specilaties from the db
+        try {
+            const specialties = app.functions.health.getSpecialties();
+            res.status(200).json(specialties);
+        } catch (error) {
+            res.status(400).send('error in get route\n'+error);
+        }
+    })
+
+    app.get("/area", (req, res) => {
+        // get all specilaties from the db
+        try {
+            const areas = app.functions.health.getAreas();
+            res.status(200).json(areas);
+        } catch (error) {
+            res.status(400).send('error in get route\n'+error);
+        }
+    })
+
     // POST ROUTES
 
     app.post("/health/", (req, res) => {
@@ -87,7 +107,6 @@ module.exports = app => {
             res.status(400).send('error in delete route\n'+error)
         }
     });
-    
     
     // PATCH ROUTES
     
