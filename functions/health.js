@@ -91,11 +91,50 @@ module.exports = app => {
         });
     }
 
+    const removeAreaFromProfessional = (credential) => {
+        return new Promise((resolve, reject) => {
+            app.db('professional_area').where({credential}).delete('credential')
+            .then(insertResult => {
+                resolve(insertResult);
+            })
+            .catch(err => {
+                reject(Error('error in removing data\n'+err))
+            });
+        });
+    }
+
+    const insertSpecialtyToProfessional = (specialty_id,credential) => {
+        return new Promise((resolve, reject) => {
+            app.db('professional_area').insert({credential,specialty_id},'credential')
+            .then(insertResult => {
+                resolve(insertResult);
+            })
+            .catch(err => {
+                reject(Error('error in inserting data\n'+err))
+            });
+        });
+    }
+
+    const removeSpecialtyFromProfessional = (credential) => {
+        return new Promise((resolve, reject) => {
+            app.db('professional_specialty').where({credential}).delete('credential')
+            .then(insertResult => {
+                resolve(insertResult);
+            })
+            .catch(err => {
+                reject(Error('error in removing data\n'+err))
+            });
+        });
+    }
+
     return {
         createHealthProfessional,
         getAllHealthProfessional,
         getHealthProfessionalByCredential,
         getHealthProfessionalAppointments,
         insertAreaToProfessional,
+        removeAreaFromProfessional,
+        insertSpecialtyToProfessional,
+        removeSpecialtyFromProfessional,
     }
 }
