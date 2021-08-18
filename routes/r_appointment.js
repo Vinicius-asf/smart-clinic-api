@@ -47,6 +47,7 @@ module.exports = app => {
     app.patch("/appointment/:id", (req, res) => {
         // update specific appointment
         const appointment_id = req.params.id;
+        console.log(req.body);
         app.functions.p_appointment.updateAppointmentById(appointment_id,req.body)
         .then(result=>{
             const appointment = result;
