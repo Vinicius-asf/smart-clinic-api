@@ -81,7 +81,7 @@ module.exports = app => {
             const deletedResult = await app.functions.health.removeAreaFromProfessional(credential);
             console.log('deleted area from '+deletedResult);
             // add area to health worker
-            req.body.area.forEach(async area_id=>{
+            req.body.area_id.forEach(async area_id=>{
                 const addResult = await app.functions.health.insertAreaToProfessional(area_id,credential);
                 console.log(`added area ${area_id} to ${addResult}`);
             })
