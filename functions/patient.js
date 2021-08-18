@@ -38,7 +38,7 @@ module.exports = app => {
 
     const updatePatientByEmail = (email,newData) => {
         return new Promise((resolve,reject)=>{
-            app.db('patient').where({email}).update({...newData,update_at: Date.now()})
+            app.db('patient').where({email}).update({updated_at: new Date()})
             .then(queryResult => {
                 resolve(queryResult);
             })

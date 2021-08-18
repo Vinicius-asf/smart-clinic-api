@@ -71,7 +71,7 @@ module.exports = app => {
     const removeProfessionalfromClinic = (credential,clinic_id) =>{
         return new Promise ((resolve,reject) => {
             app.db('clinics_healthcare_professional').where({credential,clinic_id})
-            .update({credential,clinic_id,deleted_at: Date.now()},['credential','clinic_id'])
+            .update({credential,clinic_id,deleted_at: new Date()},['credential','clinic_id'])
             .then(updateResult => {
                 resolve(updateResult);
             })
@@ -87,5 +87,6 @@ module.exports = app => {
         getClinicAppointments,
         getAllClinicPatients,
         addProfessionalToClinic,
+        removeProfessionalfromClinic,
     }
 }

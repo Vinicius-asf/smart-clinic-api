@@ -159,6 +159,7 @@ module.exports = app => {
     return {
         createHealthProfessional,
         getAllHealthProfessional,
+        updateHealthProfessional,
         getHealthProfessionalByCredential,
         getHealthProfessionalAppointments,
         insertAreaToProfessional,
