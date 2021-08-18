@@ -50,17 +50,13 @@ module.exports = app => {
 
     const deleteAppointment = (appointment_id) => {
         return new Promise((resolve,reject)=>{
-            app.db('appointment').where({appointment_id})
-            .then(queryResult => {
-                app.db('appointment').where({appointment_id}).update({...queryResult,deleted_at: Date.now()})
-                .then(updateResult => {
-                    resolve(updateResult);
-                })
-                .catch(err => {
-                    reject(Error('error in deleting appointment\n'+err));
-                })
+            app.db('appointment').where({appointment_id}).update({deleted_at: Date.now()},'appointment_id')
+            .then(updateResult => {
+                resolve(updateResult);
             })
-            .catch(err => {reject(Error('error in fetching appointment\n'+err));});
+            .catch(err => {
+                reject(Error('error in deleting appointment\n'+err));
+            })
         })
     }
 
