@@ -40,7 +40,7 @@ module.exports = app => {
 
     const updateAppointmentById = (appointment_id,newData) => {
         return new Promise((resolve,reject) => {
-            app.db('appointment').where({appointment_id}).update({...newData,update_at: new Date.now()},'appointment_id')
+            app.db('appointment').where({appointment_id}).update({...newData,update_at: Date.now()},'appointment_id')
             .then(queryResult => {
                 resolve(queryResult);
             })
@@ -52,7 +52,7 @@ module.exports = app => {
         return new Promise((resolve,reject)=>{
             app.db('appointment').where({appointment_id})
             .then(queryResult => {
-                app.db('appointment').where({appointment_id}).update({...queryResult,deleted_at:new Date.now()})
+                app.db('appointment').where({appointment_id}).update({...queryResult,deleted_at: Date.now()})
                 .then(updateResult => {
                     resolve(updateResult);
                 })
