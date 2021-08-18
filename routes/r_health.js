@@ -53,6 +53,24 @@ module.exports = app => {
             res.status(400).send(error);
         })
     });
+
+    app.post("/health/:crm/area", async (req, res) => {
+        const credential = req.params.crm;
+        try {            
+            // remove previous area from health worker, if any
+            const deletedResult = await app.functions.health.removeAreaFromProfessional(credential);
+            console.log('deleted area from '+deletedResult);
+            // add area to health worker
+            req.body.area.forEach(area_id=>{
+                const addResult = await app.functions.health.insertAreaToProfessional(area_id,credential);
+                console.log(`added area ${area_id} to ${addResult}`);
+            })
+            res.status(200).json(credential);
+        } catch (error) {
+            res.status(400).send('error in delete route\n'+error)
+        }
+    })
+    
     
     // PATCH ROUTES
     

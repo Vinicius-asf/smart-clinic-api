@@ -93,8 +93,3 @@ As rotas da API definidas para essa aplicação são:
 
 # app.get("/patient/:email/appointment")
 * Pega do banco todas as consultas de um determinado paciente (precisa informar a chava primária deste: e-mail). Retorna os dados da consulta e também o nome da clínica e os dados do profissional responsável pela consulta
-
-
-
-
-
