@@ -10,7 +10,7 @@ app.db = db;
 
 app.use(cors())
 app.use(body_parser.urlencoded({
-    extended: false
+    extended: true
 }));
 app.use(body_parser.json());
 
