@@ -52,7 +52,7 @@ module.exports = app => {
         return new Promise((resolve,reject)=>{
             app.db('appointment').where({appointment_id})
             .then(queryResult => {
-                app.db('appointment').where({appointment_id}).update({...queryResult,deleted_at:new Date()})
+                app.db('appointment').where({appointment_id}).update({...queryResult,deleted_at:new Date.now()})
                 .then(updateResult => {
                     resolve(updateResult);
                 })
