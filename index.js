@@ -73,18 +73,18 @@ app.delete("/appointment/:id", (req, res) => {
     });
 });
 
-app.get("/appointment/:id/exam", (req, res) => {
-    // get specific appointment exams
-        const appointment_id = req.params.id;
-        app.functions.p_appointment.getAppointmentExams(appointment_id)
-        .then(result => {
-            const exams = result;
-            res.status(200).json(exams);
-        })
-        .catch(error => {
-            res.status(400).send("Unsuccessful request\n"+error);
-        })
-});
+// app.get("/appointment/:id/exam", (req, res) => {
+//     // get specific appointment exams
+//         const appointment_id = req.params.id;
+//         app.functions.p_appointment.getAppointmentExams(appointment_id)
+//         .then(result => {
+//             const exams = result;
+//             res.status(200).json(exams);
+//         })
+//         .catch(error => {
+//             res.status(400).send("Unsuccessful request\n"+error);
+//         })
+// });
 
 app.post("/appointment/:id/exam", (req, res) => {
     // create specific appointment exam
