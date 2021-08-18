@@ -42,7 +42,7 @@ module.exports = app => {
     const getHealthProfessionalAppointments = async (credential) => {
         try {
             const appointments = await app.db('appointment').where({credential});
-            appointments.forEach((appointment, index) => {
+            appointments.forEach(async (appointment, index) => {
                 appointments[index].patient = await getPatientFromAppointment(appointment.patient_email);
                 appointments[index].clinc = await getClinicFromAppointment(appointment.clinic_id);
             });
