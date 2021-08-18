@@ -70,6 +70,23 @@ module.exports = app => {
             res.status(400).send('error in delete route\n'+error)
         }
     })
+
+    app.post("/health/:crm/specialty", async (req, res) => {
+        const credential = req.params.crm;
+        try {
+            // remove previous specialty from health worker, if any
+            const deletedResult = await app.functions.health.removeSpecialtyFromProfessional(credential);
+            console.log('deleted specialty from '+deletedResult);
+            // add specialty to health worker
+            req.body.specialty.forEach(specialty_id=>{
+                const addResult = await app.functions.health.insertSpecialtyToProfessional(specialty_id,credential);
+                console.log(`added specialty ${specialty_id} to ${addResult}`);
+            })
+            res.status(200).json(credential);
+        } catch (error) {
+            res.status(400).send('error in delete route\n'+error)
+        }
+    });
     
     
     // PATCH ROUTES
