@@ -40,7 +40,7 @@ module.exports = app => {
 
     const updateAppointmentById = (appointment_id,newData) => {
         return new Promise((resolve,reject) => {
-            app.db('appointment').where({appointment_id}).update({...newData,update_at: new Date()},'appointment_id')
+            app.db('appointment').where({appointment_id}).update({...newData,updated_at: new Date()},'appointment_id')
             .then(queryResult => {
                 resolve(queryResult);
             })
