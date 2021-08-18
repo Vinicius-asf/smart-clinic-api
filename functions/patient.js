@@ -49,6 +49,9 @@ module.exports = app => {
     const getAllPatientAppointmentsByEmail = (email) => {
         return new Promise((resolve,reject)=>{
             app.db('appointment').where('patient_email', email)
+            .join('healthcare_professional', 'appointment.credential', '=', 'healthcare_professional.credential')
+            .join('clinic', 'clinic_id', '=', 'appointment.clinic_id')
+            .select('appointment.*', 'healthcare_professional.name', 'healthcare_professional.credential', 'clinic.name')
             .then(queryResult => {
                 resolve(queryResult);
             })
