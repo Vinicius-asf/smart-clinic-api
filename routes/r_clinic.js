@@ -60,4 +60,12 @@ module.exports = app => {
         // create patient and relate it to a specific clinic
         res.status(200).json("Successful request");
     });
+
+    app.post("/clinic/:id/health/:crm")
+
+    // DELETE ROUTES
+
+    app.delete("/clinic/:id/health/:crm")
+
+    
 }
