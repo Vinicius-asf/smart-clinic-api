@@ -54,11 +54,11 @@ As rotas da API definidas para essa aplicação são:
 * Função para inserir no banco dados de um profissional de saúde
 * Não conta com a atualização de área de atuação ou especialidade
 
-# app.patch("/health/:crm") TO DO
+# app.patch("/health/:crm")
 * Função para atualizar os dados do profissional da saúde
 * Não conta com a atualização de área de atuação ou especialidade
 
-# app.post("/health/:crm/area") TO DO
+# app.post("/health/:crm/area")
 * Função para atualizar a área de atuação de um profissional específico
 * Deleta os dados antigos
 * Deixar body como o exemplo abaixo:
@@ -67,7 +67,7 @@ As rotas da API definidas para essa aplicação são:
             area_id:[1,2,3] // ids das áreas de atuação
         }
 
-# app.post("/health/:crm/specialty") TO DO
+# app.post("/health/:crm/specialty")
 * Função para atualizar a área de atuação de um profissional específico
 * Deleta os dados antigos
 * Deixar body como o exemplo abaixo:
@@ -76,11 +76,17 @@ As rotas da API definidas para essa aplicação são:
             specialty:[1,2,3] // ids das áreas de atuação
         }
 
-# app.get("/specialty") TO DO
+# app.get("/specialty")
 * Função para pegar todas as especialidades armazenadas no sistema
 
-# app.get("/area") TO DO
+# app.get("/area")
 * Função para pegar todas as áreas de atuação armazenadas no sistema
+
+# app.post("/clinic/:id/health/:crm")
+* Função para conectar uma clinica a um profissional da saúde
+
+# app.delete("/clinic/:id/health/:crm")
+* Função para (soft) deletar um profissional de uma clínica
 
 # app.get("/patient/:email")
 * Pegar do banco os dados específicos de um paciente através da chave primária (e-mail). Retorna todos os dados do paciente, menos a senha
