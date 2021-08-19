@@ -43,8 +43,8 @@ module.exports = app => {
     app.get("/specialty", (req, res) => {
         // get all specilaties from the db
         try {
-            const specialties = app.functions.health.getSpecialties();
-            res.status(200).json(specialties);
+            const specialities = app.functions.health.getSpecialities();
+            res.status(200).json(specialities);
         } catch (error) {
             res.status(400).send('error in get route\n'+error);
         }

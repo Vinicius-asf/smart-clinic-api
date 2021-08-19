@@ -127,9 +127,9 @@ module.exports = app => {
         });
     }
 
-    const getSpecialties = () => {
+    const getSpecialities = () => {
         return new Promise((resolve, reject) => {
-            app.db('specialty')
+            app.db('speciality')
             .then(queryResult => resolve(queryResult))
             .catch(err => reject(Error('error in fetching data\n'+err)));
         })
@@ -166,7 +166,7 @@ module.exports = app => {
         removeAreaFromProfessional,
         insertSpecialtyToProfessional,
         removeSpecialtyFromProfessional,
-        getSpecialties,
+        getSpecialities,
         getAreas,
     }
 }
