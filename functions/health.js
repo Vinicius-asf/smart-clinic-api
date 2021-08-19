@@ -105,7 +105,7 @@ module.exports = app => {
 
     const insertSpecialtyToProfessional = (specialty_id,credential) => {
         return new Promise((resolve, reject) => {
-            app.db('professional_area').insert({credential,specialty_id},'credential')
+            app.db('professional_speciality').insert({credential,specialty_id},'credential')
             .then(insertResult => {
                 resolve(insertResult);
             })
@@ -117,7 +117,7 @@ module.exports = app => {
 
     const removeSpecialtyFromProfessional = (credential) => {
         return new Promise((resolve, reject) => {
-            app.db('professional_specialty').where({credential}).delete('credential')
+            app.db('professional_speciality').where({credential}).delete('credential')
             .then(insertResult => {
                 resolve(insertResult);
             })
