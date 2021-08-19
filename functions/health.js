@@ -60,15 +60,10 @@ module.exports = app => {
                     const resultData = appointments.map((appointment, index) => {
                         return {...appointment,patient:patients[index],clinic:clinics[index]}
                     })
-                    // console.log(resultData)
+                    console.log(resultData)
                     return resultData;
                 })
             })
-
-            // appointments.forEach(async (appointment, index) => {
-            //     appointments[index].patient = await getPatientFromAppointment(appointment.patient_email);
-            //     appointments[index].clinic = await getClinicFromAppointment(appointment.clinic_id);
-            // });
         }
         catch(err) {
             throw Error('error in fetching data\n'+err);
