@@ -53,13 +53,15 @@ module.exports = app => {
 
             Promise.all(clinic_list)
             .then(clinics => {
-                console.log(clinics)
+                // console.log(clinics)
                 Promise.all(patient_list)
                 .then(patients=>{
-                    console.log(patients)
-                    return appointments.map((appointment, index) => {
+                    // console.log(patients)
+                    const resultData = appointments.map((appointment, index) => {
                         return {...appointment,patient:patients[index],clinic:clinics[index]}
                     })
+                    console.log(resultData)
+                    return resultData;
                 })
             })
 
