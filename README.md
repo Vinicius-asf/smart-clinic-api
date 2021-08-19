@@ -76,7 +76,7 @@ As rotas da API definidas para essa aplicação são:
             specialty:[1,2,3] // ids das áreas de atuação
         }
 
-# app.get("/specialty")
+# app.get("/speciality")
 * Função para pegar todas as especialidades armazenadas no sistema
 
 # app.get("/area")

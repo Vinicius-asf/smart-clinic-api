@@ -40,7 +40,7 @@ module.exports = app => {
         })
     });
 
-    app.get("/specialty", (req, res) => {
+    app.get("/speciality", (req, res) => {
         // get all specilaties from the db
         try {
             const specialities = app.functions.health.getSpecialities();
