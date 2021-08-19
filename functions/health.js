@@ -58,9 +58,7 @@ module.exports = app => {
                 .then(patients=>{
                     console.log(patients)
                     return appointments.map((appointment, index) => {
-                        appointment["patient"] = patients[index];
-                        appointment["clinic"] = clinics[index];
-                        return appointment
+                        return {...appointment,patient:patients[index],clinic:clinics[index]}
                     })
                 })
             })
