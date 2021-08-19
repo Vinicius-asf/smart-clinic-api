@@ -3,7 +3,7 @@ module.exports = app => {
         return new Promise((resolve,reject)=>{
             app.db('appointment').insert({...appointment},'appointment_id')
             .then(insertResult => {
-                resolve(appointment_id);
+                resolve(insertResult);
             })
             .catch(err =>{
                 reject(Error('error in creating new appointment\n'+err));
