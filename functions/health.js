@@ -46,7 +46,7 @@ module.exports = app => {
             const clinic_list = [];
             const patient_list = [];
 
-            appointments.forEach(async (appointment, index) => {
+            appointments.forEach((appointment, index) => {
                 patient_list.push(getPatientFromAppointment(appointment.patient_email));
                 clinic_list.push(getClinicFromAppointment(appointment.clinic_id));
             });
