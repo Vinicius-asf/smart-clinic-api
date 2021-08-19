@@ -51,7 +51,7 @@ module.exports = app => {
                 clinic_list.push(getClinicFromAppointment(appointment.clinic_id));
             });
 
-            Promise.all(clinic_list)
+            const promises = Promise.all(clinic_list)
             .then(clinics => {
                 // console.log(clinics)
                 Promise.all(patient_list)
@@ -63,7 +63,9 @@ module.exports = app => {
                     console.log(resultData)
                     return resultData;
                 })
-            })
+            });
+
+            return promises;
             // returning it just for legacy, remove later
             // return appointments
         }
