@@ -15,17 +15,24 @@ module.exports = app => {
         })
     });
     
-    app.get("/health/:crm/appointment", (req, res) => {
+    app.get("/health/:crm/appointment", async (req, res) => {
         // get health worker appointment by credential (crm)
         const crm = req.params.crm;
-        app.functions.health.getHealthProfessionalAppointments(crm)
-        .then(result => {
+        try {
+            const result = await app.functions.health.getHealthProfessionalAppointments(crm)
             console.log(result);
             res.status(200).json(result);
-        })
-        .catch(error => {
+        } catch (error) {
             res.status(400).send(error);
-        })
+        }
+        // app.functions.health.getHealthProfessionalAppointments(crm)
+        // .then(result => {
+            // console.log(result);
+        //     res.status(200).json(result);
+        // })
+        // .catch(error => {
+        //     res.status(400).send(error);
+        // })
     });
     
     app.get("/health/", (req, res) => {
