@@ -42,12 +42,31 @@ module.exports = app => {
     const getHealthProfessionalAppointments = async (credential) => {
         try {
             const appointments = await app.db('appointment').where({credential});
-            appointments = appointments.map(async (appointment, index) => {
-                // const newAppointment = appointment;
-                appointment["patient"] = await getPatientFromAppointment(appointment.patient_email);
-                appointment["clinic"] = await getClinicFromAppointment(appointment.clinic_id);
-                return appointment;
+
+            const clinic_list = [];
+            const patient_list = [];
+
+            appointments.forEach(async (appointment, index) => {
+                patient_list.push(getPatientFromAppointment(appointment.patient_email));
+                clinic_list.push(getClinicFromAppointment(appointment.clinic_id));
             });
+
+            Promise.all(clinic_list)
+            .then(clinics => {
+                Promise.all(patient_list)
+                .then(patients=>{
+                    return appointments.map((appointment, index) => {
+                        appointment.patient = patients[index];
+                        appointment.clinic = clinics[index];
+                        return appointment
+                    })
+                })
+            })
+
+            // appointments.forEach(async (appointment, index) => {
+            //     appointments[index].patient = await getPatientFromAppointment(appointment.patient_email);
+            //     appointments[index].clinic = await getClinicFromAppointment(appointment.clinic_id);
+            // });
 
             return appointments;
         }
