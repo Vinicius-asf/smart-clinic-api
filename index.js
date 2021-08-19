@@ -10,9 +10,9 @@ app.db = db;
 
 app.use(cors())
 app.use(body_parser.urlencoded({
-    extended: true
+    extended: false
 }));
-// app.use(body_parser.json());
+app.use(body_parser.json());
 
 consign()
     .then('./functions')
