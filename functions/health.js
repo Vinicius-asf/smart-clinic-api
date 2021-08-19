@@ -103,9 +103,9 @@ module.exports = app => {
         });
     }
 
-    const insertSpecialtyToProfessional = (specialty_id,credential) => {
+    const insertSpecialtyToProfessional = (speciality_id,credential) => {
         return new Promise((resolve, reject) => {
-            app.db('professional_speciality').insert({credential,specialty_id},'credential')
+            app.db('professional_speciality').insert({credential,speciality_id},'credential')
             .then(insertResult => {
                 resolve(insertResult);
             })
