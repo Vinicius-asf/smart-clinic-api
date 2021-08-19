@@ -53,11 +53,13 @@ module.exports = app => {
 
             Promise.all(clinic_list)
             .then(clinics => {
+                console.log(clinics)
                 Promise.all(patient_list)
                 .then(patients=>{
+                    console.log(patients)
                     return appointments.map((appointment, index) => {
-                        appointment.patient = patients[index];
-                        appointment.clinic = clinics[index];
+                        appointment["patient"] = patients[index];
+                        appointment["clinic"] = clinics[index];
                         return appointment
                     })
                 })
