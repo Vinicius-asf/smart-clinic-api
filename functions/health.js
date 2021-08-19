@@ -65,7 +65,7 @@ module.exports = app => {
                 })
             })
             // returning it just for legacy, remove later
-            return appointments
+            // return appointments
         }
         catch(err) {
             throw Error('error in fetching data\n'+err);
