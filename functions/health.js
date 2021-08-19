@@ -65,7 +65,7 @@ module.exports = app => {
                 })
             });
 
-            return promises;
+            return Promise.resolve(promises);
             // returning it just for legacy, remove later
             // return appointments
         }
