@@ -68,7 +68,7 @@ module.exports = app => {
         const credential = req.params.crm;
 
         try {
-            const result = await app.functions.health.addProfessionalToClinic(credential,clinic_id);
+            const result = await app.functions.clinic.addProfessionalToClinic(credential,clinic_id);
             res.status(200).json(result);
         } catch (error) {
             res.status(400).send('error in post route\n'+error);
@@ -82,7 +82,7 @@ module.exports = app => {
         const credential = req.params.crm;
 
         try {
-            const result = await app.functions.health.removeProfessionalfromClinic(credential,clinic_id);
+            const result = await app.functions.clinic.removeProfessionalfromClinic(credential,clinic_id);
             res.status(200).json(result);
         } catch (error) {
             res.status(400).send('error in post route\n'+error);
