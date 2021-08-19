@@ -9,10 +9,10 @@ const app = mod_express();
 app.db = db;
 
 app.use(cors())
-app.use(body_parser.urlencoded({
+app.use(mod_express.urlencoded({
     extended: false
 }));
-app.use(body_parser.json());
+app.use(mod_express.json());
 
 consign()
     .then('./functions')
