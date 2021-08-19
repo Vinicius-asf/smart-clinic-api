@@ -43,10 +43,10 @@ module.exports = app => {
         try {
             const appointments = await app.db('appointment').where({credential});
             appointments = appointments.map(async (appointment, index) => {
-                const newAppointment = appointment;
-                newAppointment.patient = await getPatientFromAppointment(appointment.patient_email);
-                newAppointment.clinic = await getClinicFromAppointment(appointment.clinic_id);
-                return newAppointment;
+                // const newAppointment = appointment;
+                appointment["patient"] = await getPatientFromAppointment(appointment.patient_email);
+                appointment["clinic"] = await getClinicFromAppointment(appointment.clinic_id);
+                return appointment;
             });
 
             return appointments;
