@@ -40,20 +40,20 @@ module.exports = app => {
         })
     });
 
-    app.get("/speciality", (req, res) => {
+    app.get("/speciality", async (req, res) => {
         // get all specilaties from the db
         try {
-            const specialities = app.functions.health.getSpecialities();
+            const specialities = await app.functions.health.getSpecialities();
             res.status(200).json(specialities);
         } catch (error) {
             res.status(400).send('error in get route\n'+error);
         }
     })
 
-    app.get("/area", (req, res) => {
+    app.get("/area", async (req, res) => {
         // get all specilaties from the db
         try {
-            const areas = app.functions.health.getAreas();
+            const areas = await app.functions.health.getAreas();
             res.status(200).json(areas);
         } catch (error) {
             res.status(400).send('error in get route\n'+error);
