@@ -1,17 +1,5 @@
 module.exports = app => {
 
-    // const getClinicInformation = (clinic_id) => {
-    //     return new Promise((resolve, reject) => {
-    //         app.db('clinics_healthcare_professional').where('clinic_id', clinic_id)
-    //         .then(queryResult => {
-    //             resolve(queryResult);
-    //         })
-    //         .catch(err => {
-    //             reject(Error('error in get clinic information\n'+err))
-    //         });
-    //     });
-    // }
-
     const getClinicInformation = async (clinic_id) => {
         try {
             const clinic_professionals_list = await app.db('clinics_healthcare_professional').where('clinic_id', clinic_id)
@@ -21,9 +9,16 @@ module.exports = app => {
             .select('clinics_healthcare_professional.clinic_id', 'clinics_healthcare_professional.credential', 'healthcare_professional.name',
             'speciality.speciality_id', 'speciality.speciality');
             
-            console.log(clinic_professionals_list);
-            return clinic_professionals_list;
+            const specialities = [];
+            const result_clinic = {};
+            result_clinic.clinic_id = clinic_id;
 
+            result_clinic.specialities = [];
+            clinic_professionals_list.forEach((professional, index) => {
+                result_clinic.specialities.push()
+            });
+
+            return clinic_professionals_list;
         }
         catch(err) {
             throw Error('error in fetching data\n'+err);
