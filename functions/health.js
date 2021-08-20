@@ -56,23 +56,6 @@ module.exports = app => {
             return appointments.map((appointment, index) => {
                 return {...appointment,patient:patients[index],clinic:clinics[index]}
             });
-
-            // .then(clinics => {
-            //     // console.log(clinics)
-            //     Promise.all(patient_list)
-            //     .then(patients=>{
-            //         // console.log(patients)
-            //         const resultData = appointments.map((appointment, index) => {
-            //             return {...appointment,patient:patients[index],clinic:clinics[index]}
-            //         })
-            //         console.log(resultData)
-            //         return resultData;
-            //     })
-            // });
-
-            // return promises;
-            // returning it just for legacy, remove later
-            // return appointments
         }
         catch(err) {
             throw Error('error in fetching data\n'+err);
