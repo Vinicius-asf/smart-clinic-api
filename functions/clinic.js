@@ -1,15 +1,33 @@
 module.exports = app => {
 
-    const getClinicInformation = (clinic_id) => {
-        return new Promise((resolve, reject) => {
-            app.db('clinic').where('clinic_id', clinic_id).first()
-            .then(queryResult => {
-                resolve(queryResult);
-            })
-            .catch(err => {
-                reject(Error('error in get clinic information\n'+err))
-            });
-        });
+    // const getClinicInformation = (clinic_id) => {
+    //     return new Promise((resolve, reject) => {
+    //         app.db('clinics_healthcare_professional').where('clinic_id', clinic_id)
+    //         .then(queryResult => {
+    //             resolve(queryResult);
+    //         })
+    //         .catch(err => {
+    //             reject(Error('error in get clinic information\n'+err))
+    //         });
+    //     });
+    // }
+
+    const getClinicInformation = async (clinic_id) => {
+        try {
+            const clinic_professionals_list = await app.db('clinics_healthcare_professional').where('clinic_id', clinic_id)
+            .join('healthcare_professional', 'clinics_healthcare_professional.credential', '=', 'healthcare_professional.credential')
+            .join('professional_speciality', 'healthcare_professional.credential', '=', 'professional_speciality.credential')
+            .join('speciality', 'professional_speciality.speciality_id', '=', 'speciality.speciality.id')
+            .select('clinics_healthcare_professional.clinic', 'clinics_healthcare_professional.credential', 'healthcare_professional.name',
+            'speciality.speciality_id', 'speciality.speciality');
+            
+            console.log(clinic_professionals_list);
+            return clinic_professionals_list;
+
+        }
+        catch(err) {
+            throw Error('error in fetching data\n'+err);
+        }
     }
 
     const getAllClinics = () => {
