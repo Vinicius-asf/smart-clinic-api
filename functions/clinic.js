@@ -17,8 +17,8 @@ module.exports = app => {
             const clinic_professionals_list = await app.db('clinics_healthcare_professional').where('clinic_id', clinic_id)
             .join('healthcare_professional', 'clinics_healthcare_professional.credential', '=', 'healthcare_professional.credential')
             .join('professional_speciality', 'healthcare_professional.credential', '=', 'professional_speciality.credential')
-            .join('speciality', 'professional_speciality.speciality_id', '=', 'speciality.speciality.id')
-            .select('clinics_healthcare_professional.clinic', 'clinics_healthcare_professional.credential', 'healthcare_professional.name',
+            .join('speciality', 'professional_speciality.speciality_id', '=', 'speciality.speciality_id')
+            .select('clinics_healthcare_professional.clinic_id', 'clinics_healthcare_professional.credential', 'healthcare_professional.name',
             'speciality.speciality_id', 'speciality.speciality');
             
             console.log(clinic_professionals_list);
