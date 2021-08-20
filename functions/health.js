@@ -51,21 +51,26 @@ module.exports = app => {
                 clinic_list.push(getClinicFromAppointment(appointment.clinic_id));
             });
 
-            const promises = Promise.all(clinic_list)
-            .then(clinics => {
-                // console.log(clinics)
-                Promise.all(patient_list)
-                .then(patients=>{
-                    // console.log(patients)
-                    const resultData = appointments.map((appointment, index) => {
-                        return {...appointment,patient:patients[index],clinic:clinics[index]}
-                    })
-                    console.log(resultData)
-                    return resultData;
-                })
+            const clinics = await Promise.all(clinic_list);
+            const patients = await Promise.all(patient_list);
+            return appointments.map((appointment, index) => {
+                return {...appointment,patient:patients[index],clinic:clinics[index]}
             });
 
-            return await promises;
+            // .then(clinics => {
+            //     // console.log(clinics)
+            //     Promise.all(patient_list)
+            //     .then(patients=>{
+            //         // console.log(patients)
+            //         const resultData = appointments.map((appointment, index) => {
+            //             return {...appointment,patient:patients[index],clinic:clinics[index]}
+            //         })
+            //         console.log(resultData)
+            //         return resultData;
+            //     })
+            // });
+
+            // return promises;
             // returning it just for legacy, remove later
             // return appointments
         }
