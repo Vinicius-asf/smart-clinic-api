@@ -9,16 +9,24 @@ module.exports = app => {
             .select('clinics_healthcare_professional.clinic_id', 'clinics_healthcare_professional.credential', 'healthcare_professional.name',
             'speciality.speciality_id', 'speciality.speciality');
             
-            const specialities = [];
             const result_clinic = {};
             result_clinic.clinic_id = clinic_id;
 
             result_clinic.specialities = [];
             clinic_professionals_list.forEach((professional, index) => {
-                result_clinic.specialities.push()
+                const specialities = result_clinic.specialities.reduce((previousValue,currentValue)=>{previousValue.push(currentValue.speciality);return previousValue},[]);
+                // console.log('sp: ',specialities)
+                if (!specialities.includes(professional.speciality)){
+                    result_clinic[professional.speciality] = [];
+                    result_clinic.specialities.push({speciality:professional.speciality,speciality_id:professional.speciality_id});
+                }
+                result_clinic[professional.speciality].push({
+                    credential:professional.credential,
+                    name:professional.name,
+                });
             });
 
-            return clinic_professionals_list;
+            return result_clinic;
         }
         catch(err) {
             throw Error('error in fetching data\n'+err);
