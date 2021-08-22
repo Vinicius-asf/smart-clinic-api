@@ -33,6 +33,7 @@ As rotas da API definidas para essa aplicação são:
 # app.get("/clinic/:id")
 * Pegar do banco os dados de uma clinica específica, incluindo suas especialidades e profissionais da saúde
 * retorna um como a seguir:
+
         {
             "clinic_id": 1,
             "specialities": [
