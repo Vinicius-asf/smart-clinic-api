@@ -31,7 +31,37 @@ As rotas da API definidas para essa aplicação são:
 * Pegar do banco todas as clinicas (id e nome)
 
 # app.get("/clinic/:id")
-* TO-DO
+* Pegar do banco os dados de uma clinica específica, incluindo suas especialidades e profissionais da saúde
+* retorna um como a seguir:
+        {
+            "clinic_id": 1,
+            "specialities": [
+                {
+                    "speciality": "Urologia",
+                    "speciality_id": 1
+                },
+                {
+                    "speciality": "Cardiologia",
+                    "speciality_id": 2
+                }
+            ],
+            "Urologia": [
+                {
+                    "credential": "12345678",
+                    "name": "Tom Nook"
+                },
+                {
+                    "credential": "11111111",
+                    "name": "Redd"
+                }
+            ],
+            "Cardiologia": [
+                {
+                    "credential": "12345678",
+                    "name": "Tom Nook"
+                }
+            ]
+        }
 
 # app.get("/clinic/:id/appointment")
 * Pegar do banco todas as consultas de uma clinica, informando o id dessa clinica
