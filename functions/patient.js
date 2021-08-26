@@ -6,12 +6,12 @@ module.exports = app => {
 
             app.db('patient').insert({...body},'email')
             .then(newPatient => {
-                const dummyAppointment = {patient_email: body.patient_email,
+                const dummyAppointment = {patient_email: body.email,
                     clinic_id: body_clinic_id,
                     credential: '12345678',
                     real_appointment: false,
                     appointment_time: '00:00',
-                    appointment_date:'0000-00-00'};
+                    appointment_date:'1900-01-01'};
                 app.db('appointment').insert(dummyAppointment, 'appointment_id').then(appointment => {
                     resolve({newPatient, appointment});
                 })
