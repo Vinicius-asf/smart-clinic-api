@@ -41,7 +41,7 @@ module.exports = app => {
     // get health worker appointment by credential (crm)
     const getHealthProfessionalAppointments = async (credential) => {
         try {
-            const appointments = await app.db('appointment').where({credential});
+            const appointments = await app.db('appointment').where({credential}).andWhere('real_appointment', true);
 
             const clinic_list = [];
             const patient_list = [];

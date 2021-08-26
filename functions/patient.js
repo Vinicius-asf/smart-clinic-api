@@ -59,7 +59,7 @@ module.exports = app => {
 
     const getAllPatientAppointmentsByEmail = (email) => {
         return new Promise((resolve,reject)=>{
-            app.db('appointment').where('patient_email', email)
+            app.db('appointment').where('patient_email', email).andWhere('real_appointment', true)
             .join('healthcare_professional', 'appointment.credential', '=', 'healthcare_professional.credential')
             .join('clinic', 'clinic_id', '=', 'appointment.clinic_id')
             .select('appointment.*', 'healthcare_professional.name', 'healthcare_professional.credential', 'clinic.name')
