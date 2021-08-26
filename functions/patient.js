@@ -1,9 +1,20 @@
 module.exports = app => {
-    const createPatient = (patient) => {
-        return new Promise((resolve,reject)=>{            
-            app.db('patient').insert({...patient},'email')
-            .then(insertResult => {
-                resolve(insertResult);
+    const createPatient = (body) => {
+        return new Promise((resolve,reject)=>{
+            const body_clinic_id = body.clinic_id;
+            delete body.clinic_id;
+
+            app.db('patient').insert({...body},'email')
+            .then(newPatient => {
+                const dummyAppointment = {patient_email: body.patient_email,
+                    clinic_id: body_clinic_id,
+                    credential: '12345678',
+                    real_appointment: false,
+                    appointment_time: '00:00',
+                    appointment_date:'0000-00-00'};
+                app.db('appointment').insert(dummyAppointment, 'appointment_id').then(appointment => {
+                    resolve({newPatient, appointment});
+                })
             })
             .catch(err =>{
                 // console.log(err)
