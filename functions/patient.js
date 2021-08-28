@@ -38,7 +38,7 @@ module.exports = app => {
     const getPatientByEmail = (email) => {
         console.log(email)
         return new Promise((resolve, reject)=> {
-            app.db('patient').where({email}).first()
+            app.db('patient').where({email})
             .select('email', 'name')
             .then(queryResult => {
                 console.log('query:\n'+queryResult)
