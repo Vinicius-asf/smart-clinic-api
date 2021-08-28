@@ -2,10 +2,11 @@ module.exports = app => {
     app.get("/login/:user", (req, res) => {
         // get specific appointment info
         const user = req.params.user;
-        app.functions.authentication
+        const user_data = req.body;
+        app.functions.authentication.validateUser(user, user_data)
         .then(result=>{
-            const administrative = result;
-            res.status(200).json(administrative);
+            const data_table = result;
+            res.status(200).json(data_table);
         })
         .catch(error=>{
             res.status(400).send("Unsuccessful request\n"+error);
