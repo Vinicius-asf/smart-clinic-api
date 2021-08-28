@@ -35,19 +35,6 @@ module.exports = app => {
         })
     }
 
-    /*const getPatientByEmail = (email) => {
-        return new Promise((resolve, reject)=> {
-            app.db('patient').where({email}).first()
-            .then(queryResult => {
-                console.log('query:\n'+queryResult)
-                resolve(queryResult);
-            })
-            .catch(err => {
-                reject(Error('error in fetching data\n'+err));
-            });
-        });
-    }*/
-
     const getPatientByEmail = async (email) => {
         try
         {
