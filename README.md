@@ -1,6 +1,16 @@
 # smart-clinic-api
 As rotas da API definidas para essa aplicação são:
 
+# app.post("/login/:user):
+* Rota para a tela de login
+* req.params.user -> para o perfil paciente e médico: deve ser o email; para o perfil clínica: deve ser o username da tabela 'administrative';
+* req.body deve ser o seguinte:
+        {
+            'password': 'algo',
+            'user_type': 'clinic'
+        }
+* Atenção!!! user_type só pode ser 3 valores: clinic, healthcare_professional, 'patient'
+
 # app.post("/appointment"):
 * Colocar no banco as informações sobre a consulta. Informações obrigatórias: 
 1. e-mail paciente (chave primária da tabela "patient")
