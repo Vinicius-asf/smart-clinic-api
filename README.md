@@ -126,7 +126,15 @@ As rotas da API definidas para essa aplicação são:
 * Atualizar no banco os dados de um paciente através da chave primária (e-mail). Deve-se passar no req.body os dados no formato esperado para o banco
 
 # app.post("/patient/)
-* Criar no banco os dados um paciente. Deve-se passar no req.body os dados no formato esperado para o banco
+* Criar no banco os dados um paciente. Deve-se passar no req.body os dados no formato esperado para o banco. 
+* Deixar body como o exemplo abaixo:
+        
+        {
+            "email": "name@email.com",
+            "clinic_id": "1",
+            "password": "testexx",
+            "name": "Nome aqui"    
+        }
 
 # app.get("/patient/:email/appointment")
 * Pega do banco todas as consultas de um determinado paciente (precisa informar a chava primária deste: e-mail). Retorna os dados da consulta e também o nome da clínica e os dados do profissional responsável pela consulta
