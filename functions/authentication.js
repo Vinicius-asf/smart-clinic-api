@@ -24,7 +24,7 @@ module.exports = app => {
             }
             else
             {
-                data_table.password = "";
+                delete data_table.password;
                 return data_table;
             }
         }
