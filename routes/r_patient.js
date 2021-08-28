@@ -13,8 +13,9 @@ module.exports = app => {
             res.status(400).send("Unsuccessful request\n"+error);
         }
     });*/
-    app.get("patient/:email", (req,res) => {
+    app.get("/patient/:email", (req, res) => {
         const email = req.params.email;
+        console.log(email)
         app.functions.patient.getPatientByEmail(email)
         .then(result => {
             console.log(result);
