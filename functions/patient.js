@@ -38,9 +38,10 @@ module.exports = app => {
     const getPatientByEmail = (email) => {
         return new Promise((resolve,reject)=>{
             app.db('patient').where({email}).first()
-            .select('name', 'birth_date', 'email', 'address', 'postal_code',
-            'city', 'state', 'country', 'weight', 'height')
+            //.select('name', 'birth_date', 'email', 'address', 'postal_code',
+            //'city', 'state', 'country', 'weight', 'height')
             .then(queryResult => {
+                console.log('querry:\n'+queryResult)
                 resolve(queryResult);
             })
             .catch(err => {reject(Error('error in fetching data\n'+err));});
