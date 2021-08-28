@@ -16,7 +16,7 @@ module.exports = app => {
 
     app.get("/patient/:email/appointment", (req, res) => {
         // get all appointments from patient
-            const email = req.body.email;
+            const email = req.params.email;
             app.functions.patient.getAllPatientAppointmentsByEmail(email)
             .then(result => {
                 const appointments = result;
