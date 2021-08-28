@@ -35,9 +35,10 @@ module.exports = app => {
         })
     }
 
-    /*const getPatientByEmail = (email) => {
+    const getPatientByEmail = (email) => {
         return new Promise((resolve,reject)=>{
-            app.db('patient').where({email}).first()
+            app.db('patient').where({email})
+            //.first()
             //.select('name', 'birth_date', 'email', 'address', 'postal_code',
             //'city', 'state', 'country', 'weight', 'height')
             .then(queryResult => {
@@ -46,20 +47,6 @@ module.exports = app => {
             })
             .catch(err => {reject(Error('error in fetching data\n'+err));});
         })
-    }*/
-
-    const getPatientByEmail = async (email) => {
-        try {
-            const patient = await  app.db('patient').where('email', email).first()
-            .select('name', 'birth_date', 'email', 'address', 'postal_code',
-            'city', 'state', 'country', 'weight', 'height');
-            
-            console.log('patient:\n'+patient)
-            return patient;
-        }
-        catch(err) {
-            throw Error('error in fetching data\n'+err);
-        }
     }
 
     const updatePatientByEmail = (email,newData) => {
