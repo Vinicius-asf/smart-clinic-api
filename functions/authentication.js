@@ -2,7 +2,7 @@ module.exports = app => {
 
     const validateUser = async (user, user_data) => {
         try {
-            const data_table = {};
+            let data_table = {};
             if (user_data.user_type === 'healthcare_professional')
             {
                 data_table = await app.db('healthcare_professional').where('email', user).first();
