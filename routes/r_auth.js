@@ -1,5 +1,5 @@
 module.exports = app => {
-    app.get("/login/:user", (req, res) => {
+    app.post("/login/:user", (req, res) => {
         // get specific appointment info
         const user = req.params.user;
         const user_data = req.body;

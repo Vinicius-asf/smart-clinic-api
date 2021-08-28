@@ -24,9 +24,9 @@ module.exports = app => {
             }
             else
             {
+                data_table.password = "";
                 return data_table;
             }
-
         }
        catch(err) {
            throw Error('Unable to authenticate\n'+ err);
