@@ -2,7 +2,7 @@ module.exports = app => {
 
     // GET ROUTES
 
-    app.get("/patient/:email", (req, res) => {
+    /*app.get("/patient/:email", (req, res) => {
         // get patient with email
         try {
             const email = req.params.email;
@@ -12,6 +12,18 @@ module.exports = app => {
         } catch (error) {
             res.status(400).send("Unsuccessful request\n"+error);
         }
+    });*/
+    
+    app.get("/patient/:email", (req, res) => {
+        const email = req.params.email;
+        app.functions.patient.getPatientByEmail(email)
+        .then(result=>{
+            const patient = result;
+            res.status(200).json(patient);
+        })
+        .catch(error=>{
+            res.status(400).send("Unsuccessful request\n"+error);
+        })
     });
 
     app.get("/patient/:email/appointment", (req, res) => {

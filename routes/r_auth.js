@@ -1,6 +1,5 @@
 module.exports = app => {
     app.post("/login/:user", (req, res) => {
-        // get specific appointment info
         const user = req.params.user;
         const user_data = req.body;
         app.functions.authentication.validateUser(user, user_data)
