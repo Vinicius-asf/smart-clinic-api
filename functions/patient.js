@@ -35,8 +35,7 @@ module.exports = app => {
         })
     }
 
-    const getPatientByEmail = (email) => {
-        console.log(email)
+    /*const getPatientByEmail = (email) => {
         return new Promise((resolve, reject)=> {
             app.db('patient').where({email}).first()
             .then(queryResult => {
@@ -47,6 +46,18 @@ module.exports = app => {
                 reject(Error('error in fetching data\n'+err));
             });
         });
+    }*/
+
+    const getPatientByEmail = async (email) => {
+        try
+        {
+            const patient = await app.db('patient').where('email', email).first();
+            delete patient.password;
+            return patient;
+        }
+        catch(err) {
+            throw Error('error in fetching data\n'+err);
+        }
     }
 
     const updatePatientByEmail = (email,newData) => {
@@ -69,6 +80,7 @@ module.exports = app => {
             'appointment.appointment_date', 'appointment.appointment_time',
             'healthcare_professional.name', 'healthcare_professional.credential')
             .then(queryResult => {
+                // need fix the problem with name columns
                 resolve(queryResult);
             })
             .catch(err => {
