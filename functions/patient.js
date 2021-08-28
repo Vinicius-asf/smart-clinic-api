@@ -50,11 +50,12 @@ module.exports = app => {
 
     const getPatientByEmail = async (email) => {
         try {
-            const patient = await  app.db('patient').where({email}).first()
+            const patient = await  app.db('patient').where('email', email).first()
             .select('name', 'birth_date', 'email', 'address', 'postal_code',
             'city', 'state', 'country', 'weight', 'height');
             
-            return patient
+            console.log('patient:\n'+patient)
+            return patient;
         }
         catch(err) {
             throw Error('error in fetching data\n'+err);
