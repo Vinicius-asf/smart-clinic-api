@@ -11,7 +11,17 @@ module.exports = app => {
         });
     }
 
-    const getAllHealthProfessional = () => {
+    const getAllHealthProfessional = async () => {
+        try
+        {
+            const all_health_professional = app.db('healthcare_professional').select('name', 'credential', 'professional', 'email');
+            return all_health_professional;
+        }
+        catch(err) {
+            throw Error('error in fetching data\n'+err);
+        }
+    }
+    /*const getAllHealthProfessional = () => {
         return new Promise((resolve, reject) => {
             app.db('healthcare_professional')
             .select('name', 'credential', 'professional', 'email')
@@ -22,7 +32,7 @@ module.exports = app => {
                 reject(Error('error in fetching data\n'+err));
             });
         });
-    }
+    }*/
 
     const getHealthProfessionalByCredential = (credential) => {
         // TO-DO: include the professional availability
