@@ -2,7 +2,7 @@ module.exports = app => {
 
     const getClinicInformation = async (clinic_id) => {
         try {
-            const clinic_professionals_list = await app.db('clinics_healthcare_professional').whereNull('deleted_at').andWhere('clinic_id', clinic_id)
+            const clinic_professionals_list = await app.db('clinics_healthcare_professional').where('clinic_id', clinic_id).andWhere('deleted_at', null)
             .join('healthcare_professional', 'clinics_healthcare_professional.credential', '=', 'healthcare_professional.credential')
             .join('professional_speciality', 'healthcare_professional.credential', '=', 'professional_speciality.credential')
             .join('speciality', 'professional_speciality.speciality_id', '=', 'speciality.speciality_id')
