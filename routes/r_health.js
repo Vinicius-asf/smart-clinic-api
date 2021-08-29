@@ -120,7 +120,7 @@ module.exports = app => {
     app.patch("/health/:crm", async (req, res) => {
         const credential = req.params.crm;
         try {
-            const updateResult = await app.functions.health.updateHealthProfessional(req.body);
+            const updateResult = await app.functions.health.updateHealthProfessional(credential, req.body);
             res.status(200).json(updateResult);
         } catch (error) {
             res.status(400).send('error in update route\n'+error)

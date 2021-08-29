@@ -21,18 +21,6 @@ module.exports = app => {
             throw Error('error in fetching data\n'+err);
         }
     }
-    /*const getAllHealthProfessional = () => {
-        return new Promise((resolve, reject) => {
-            app.db('healthcare_professional')
-            .select('name', 'credential', 'professional', 'email')
-            .then(queryResult => {
-                resolve(queryResult);
-            })
-            .catch(err => {
-                reject(Error('error in fetching data\n'+err));
-            });
-        });
-    }*/
 
     const getHealthProfessionalByCredential = (credential) => {
         // TO-DO: include the professional availability
@@ -161,10 +149,10 @@ module.exports = app => {
         })
     }
 
-    const updateHealthProfessional = (professional) => {
+    const updateHealthProfessional = (credential, professional) => {
         return new Promise((resolve, reject) => {
-            app.db('healthcare_professional').where({credential:professional.crm})
-            .update(professional,'credential')
+            app.db('healthcare_professional').where({credential})
+            .update({...professional, updated_at: new Date()})
             .then(updateResult => {
                 resolve(updateResult);
             })
