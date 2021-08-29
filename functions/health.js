@@ -14,7 +14,7 @@ module.exports = app => {
     const getAllHealthProfessional = async () => {
         try
         {
-            const all_health_professional = app.db('healthcare_professional').select('name', 'credential', 'professional', 'email');
+            const all_health_professional = app.db('healthcare_professional').select('name', 'credential', 'profession', 'email');
             return all_health_professional;
         }
         catch(err) {
