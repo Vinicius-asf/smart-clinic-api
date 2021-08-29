@@ -57,11 +57,11 @@ module.exports = app => {
 
     // POST ROUTES
     
-    app.post("/clinic/:id/patient", (req, res) => {
+    /*app.post("/clinic/:id/patient", (req, res) => {
         // ????
         // create patient and relate it to a specific clinic
         res.status(200).json("Successful request");
-    });
+    });*/
 
     app.post("/clinic/:id/health/:crm", async (req, res) => {
         const clinic_id = req.params.id;
@@ -73,7 +73,7 @@ module.exports = app => {
         } catch (error) {
             res.status(400).send('error in post route\n'+error);
         }
-    })
+    });
 
     // DELETE ROUTES
 
@@ -87,7 +87,7 @@ module.exports = app => {
         } catch (error) {
             res.status(400).send('error in post route\n'+error);
         }
-    })
+    });
 
     
 }
