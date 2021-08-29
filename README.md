@@ -108,13 +108,13 @@ As rotas da API definidas para essa aplicação são:
             area_id:[1,2,3] // ids das áreas de atuação
         }
 
-# app.post("/health/:crm/specialty")
+# app.post("/health/:crm/speciality")
 * Função para atualizar a área de atuação de um profissional específico
 * Deleta os dados antigos
 * Deixar body como o exemplo abaixo:
 
         {
-            specialty:[1,2,3] // ids das áreas de atuação
+            speciality_id:[1,2,3] // ids das áreas de atuação
         }
 
 # app.get("/speciality")

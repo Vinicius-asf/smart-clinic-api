@@ -98,16 +98,16 @@ module.exports = app => {
         }
     })
 
-    app.post("/health/:crm/specialty", async (req, res) => {
+    app.post("/health/:crm/speciality", async (req, res) => {
         const credential = req.params.crm;
         try {
             // remove previous specialty from health worker, if any
             const deletedResult = await app.functions.health.removeSpecialtyFromProfessional(credential);
             console.log('deleted specialty from '+deletedResult);
             // add specialty to health worker
-            req.body.specialty.forEach( async specialty_id=>{
-                const addResult = await app.functions.health.insertSpecialtyToProfessional(specialty_id,credential);
-                console.log(`added specialty ${specialty_id} to ${addResult}`);
+            req.body.speciality_id.forEach( async speciality_id=>{
+                const addResult = await app.functions.health.insertSpecialtyToProfessional(speciality_id,credential);
+                console.log(`added speciality ${speciality_id} to ${addResult}`);
             })
             res.status(200).json(credential);
         } catch (error) {
