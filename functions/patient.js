@@ -65,7 +65,7 @@ module.exports = app => {
             .join('clinic', 'appointment.clinic_id', '=', 'clinic.clinic_id')
             .select('appointment.appointment_id', 'appointment.patient_email','appointment.clinic_id', 'appointment.notes', 'appointment.appointment_notes', 'appointment.deleted_at',
             'appointment.appointment_date', 'appointment.appointment_time',
-            'healthcare_professional.name', 'healthcare_professional.credential')
+            'healthcare_professional.name as professional_name', 'healthcare_professional.credential', 'clinic.name as clinic_name')
             .then(queryResult => {
                 // need fix the problem with name columns
                 resolve(queryResult);
