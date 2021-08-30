@@ -15,6 +15,19 @@ module.exports = app => {
         })
     });
 
+    app.get("/appointment/:id/exam", (req, res) => {
+        // get specific appointment exams
+        const appointment_id = req.params.id;
+        app.functions.p_appointment.getAppointmentExams(appointment_id)
+        .then(result => {
+            const exams = result;
+            res.status(200).json(exams);
+        })
+        .catch(error => {
+            res.status(400).send("Unsuccessful request\n"+error);
+        })
+    });
+
     // POST ROUTES
 
     app.post("/appointment", (req, res) => {
@@ -30,9 +43,15 @@ module.exports = app => {
         });
     });
 
-    app.post("/appointment/:id/exam", (req, res) => {
+    app.post("/appointment/:id/exam", app.upload.single('selectedFile') , async (req, res) => {
+        // upload exam file to firebase
+        console.log(`${req.file.destination}${req.file.filename}`);
+        const uploadResponse = await app.bucket.upload(`${req.file.destination}${req.file.filename}`,{
+            destination: req.file.filename,
+        },)
+        console.log(uploadResponse[0].metadata);
         // create specific appointment exam
-        app.functions.p_appointment.createAppointmentExam(req.body)
+        app.functions.p_appointment.createAppointmentExam({...req.body,file_name:req.file.filename,url:uploadResponse[0].metadata.selfLink})
         .then(result =>{
             const exam = result;
             res.status(200).json(exam);
@@ -72,17 +91,5 @@ module.exports = app => {
             res.status(400).send("Unsuccessful request\n"+error)
         });
     });
-    
-    // app.get("/appointment/:id/exam", (req, res) => {
-    //     // get specific appointment exams
-    //         const appointment_id = req.params.id;
-    //         app.functions.p_appointment.getAppointmentExams(appointment_id)
-    //         .then(result => {
-    //             const exams = result;
-    //             res.status(200).json(exams);
-    //         })
-    //         .catch(error => {
-    //             res.status(400).send("Unsuccessful request\n"+error);
-    //         })
-    // });
+
 }

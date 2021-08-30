@@ -5,7 +5,7 @@ const consign = require('consign');
 const cors = require('cors');
 const path = require('path');
 const multer = require('multer');
-const uuid = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 
 // INITIALIZE FIREBASE
 var admin = require("firebase-admin");
@@ -17,7 +17,8 @@ admin.initializeApp({
     storageBucket: "gs://smart-clinic-pm.appspot.com",
 });
 
-const bucket = admin.storage().bucket();
+const adminStorage = admin.storage()
+const bucket = adminStorage.bucket();
 // END INITIALIZE FIREBASE
 
 // CONFIGURE MULTER STORAGER HANDLING
@@ -28,7 +29,7 @@ const storage = multer.diskStorage({
         Files will be saved in the 'uploads' directory. Make
         sure this directory already exists!
         */
-        cb(null, "./uploads");
+        cb(null, "./");
     },
     filename: (req, file, cb) => {
         /*
