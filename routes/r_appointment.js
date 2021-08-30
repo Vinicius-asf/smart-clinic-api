@@ -44,7 +44,7 @@ module.exports = app => {
         });
         console.log(downloadUrl)
         // create specific appointment exam
-        app.functions.p_appointment.createAppointmentExam({...req.body,file_name:req.file.filename,url:downloadUrl})
+        app.functions.p_appointment.createAppointmentExam({...req.body,file_name:req.file.filename,url:downloadUrl[0]})
         .then(result =>{
             const exam = result;
             res.status(200).json(exam);
