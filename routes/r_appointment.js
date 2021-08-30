@@ -30,9 +30,21 @@ module.exports = app => {
         });
     });
 
-    app.post("/appointment/:id/exam", (req, res) => {
+    app.post("/appointment/:id/exam", app.upload.single('selectedFile') , async (req, res) => {
+        // upload exam file to firebase
+        console.log(req.body.type);
+        console.log(`${req.file.destination}${req.file.filename}`);
+        const uploadResponse = await app.bucket.upload(`${req.file.destination}${req.file.filename}`,{
+            destination: req.file.filename,
+        },)
+        console.log(uploadResponse[0].metadata);
+        const downloadUrl = await app.bucket.file(req.file.filename).getSignedUrl({
+            action: 'read',
+            expires: '03-09-2491'
+        });
+        console.log(downloadUrl)
         // create specific appointment exam
-        app.functions.p_appointment.createAppointmentExam(req.body)
+        app.functions.p_appointment.createAppointmentExam({...req.body,file_name:req.file.filename,url:downloadUrl[0]})
         .then(result =>{
             const exam = result;
             res.status(200).json(exam);

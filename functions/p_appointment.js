@@ -20,7 +20,7 @@ module.exports = app => {
                 .select('name', 'address');
             const healthcare_professional = await app.db('healthcare_professional').where('credential', appointment.credential).first()
                 .select('name', 'credential');
-            const exams = await app.db('exam').where('appointment_id', appointment_id);
+            const exams = await app.db('exam').select(['file_name','url']).where('appointment_id', appointment_id);
             const speciality = await app.db('speciality').where('speciality_id', appointment.speciality_id).first();
                             
             return {...appointment, patient:patient, clinic:clinic, healthcare_professional:healthcare_professional, exams:exams, speciality: speciality};

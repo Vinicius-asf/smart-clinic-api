@@ -105,3 +105,6 @@ dist
 
 # DB dump file
 *.dump
+
+# Firebase Service Keys
+*?adminsdk.json
