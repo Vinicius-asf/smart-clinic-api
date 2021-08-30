@@ -12,6 +12,8 @@ var admin = require("firebase-admin");
 
 var serviceAccount = process.env.SERVICE_ACCOUNT_KEY ? process.env.SERVICE_ACCOUNT_KEY : require("./smart-clinic-pm-firebase-adminsdk.json");
 
+console.log(serviceAccount);
+
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     storageBucket: "gs://smart-clinic-pm.appspot.com",
