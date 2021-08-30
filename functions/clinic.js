@@ -8,7 +8,7 @@ module.exports = app => {
             .join('professional_speciality', 'healthcare_professional.credential', '=', 'professional_speciality.credential')
             .join('speciality', 'professional_speciality.speciality_id', '=', 'speciality.speciality_id')
             .select('clinics_healthcare_professional.clinic_id', 'clinics_healthcare_professional.credential', 'healthcare_professional.name',
-            'speciality.speciality_id', 'speciality.speciality');
+            'speciality.speciality_id', 'speciality.speciality').onNull('clinics_healthcare_professional.deleted_at');
             
             const result_clinic = {};
             result_clinic.clinic_id = clinic_id;
