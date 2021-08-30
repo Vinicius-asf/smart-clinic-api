@@ -10,33 +10,27 @@ module.exports = app => {
             });
         });
     }
-
-    const getAppointmentInformation = (appointment_id) => {
-        return new Promise((resolve,reject) => {
-            app.db('appointment').where('appointment_id', appointment_id).first()
-            .then(appointment => {
-                app.db('patient').where('email',appointment.patient_email).first()
-                .select('name', 'birth_date', 'weight', 'height')
-                .then(patient => {
-                    app.db('clinic').where('clinic_id', appointment.clinic_id).first()
-                    .select('name', 'address')
-                    .then(clinic => {
-                        app.db('healthcare_professional').where('credential', appointment.credential).first()
-                        .select('name', 'credential')
-                        .then(healthcare_professional => {
-                            app.db('exam').where('appointment_id', appointment_id)
-                            .then(exams => {
-                                resolve({...appointment, patient:patient, clinic:clinic, healthcare_professional:healthcare_professional, exams:exams});
-                            })
-                        })
-                    })
-                })
-            })
-            .catch(err =>{
-                reject(Error('error in get appointment information\n'+err));
-            })
-        });
+    
+    const getAppointmentInformation = async (appointment_id) => {
+        try {
+            const appointment = await app.db('appointment').where('appointment_id', appointment_id).first();
+            const patient = await app.db('patient').where('email',appointment.patient_email).first()
+                .select('name', 'birth_date', 'weight', 'height');
+            const clinic = await  app.db('clinic').where('clinic_id', appointment.clinic_id).first()
+                .select('name', 'address');
+            const healthcare_professional = await app.db('healthcare_professional').where('credential', appointment.credential).first()
+                .select('name', 'credential');
+            const exams = await app.db('exam').where('appointment_id', appointment_id);
+            const speciality = await app.db('speciality').where('speciality_id', appointment.speciality_id).first();
+                            
+            return {...appointment, patient:patient, clinic:clinic, healthcare_professional:healthcare_professional, exams:exams, speciality: speciality};
+                            
+        }
+        catch(err) {
+            throw Error('error in get appointment information\n'+err)
+        }
     }
+
 
     const updateAppointmentById = (appointment_id,newData) => {
         return new Promise((resolve,reject) => {
