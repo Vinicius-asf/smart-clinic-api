@@ -1,8 +1,8 @@
 
 exports.up = function(knex) {
     return knex.schema.table('exam', table => {
-        table.date('file_name').notNull();
-        table.time('url').notNull();
+        table.string('file_name').notNull();
+        table.string('url').notNull();
     });
 };
 
