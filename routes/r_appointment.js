@@ -38,10 +38,11 @@ module.exports = app => {
             destination: req.file.filename,
         },)
         console.log(uploadResponse[0].metadata);
-        const downloadUrl = app.bucket.file(req.file.filename).getSignedUrl({
+        const downloadUrl = await app.bucket.file(req.file.filename).getSignedUrl({
             action: 'read',
             expires: '03-09-2491'
-          });
+        });
+        console.log(downloadUrl)
         // create specific appointment exam
         app.functions.p_appointment.createAppointmentExam({...req.body,file_name:req.file.filename,url:downloadUrl})
         .then(result =>{
