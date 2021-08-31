@@ -23,7 +23,7 @@ var serviceAccount = process.env.PORT ? {
     "client_x509_cert_url": process.env.SERVICE_ACCOUNT_CLIENT_CERT_URL
   } : require("./smart-clinic-pm-firebase-adminsdk.json");
 
-console.log(serviceAccount);
+// console.log(serviceAccount);
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
