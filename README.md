@@ -5,10 +5,12 @@ As rotas da API definidas para essa aplicação são:
 * Rota para a tela de login
 * req.params.user -> para o perfil paciente e médico: deve ser o email; para o perfil clínica: deve ser o username da tabela 'administrative';
 * req.body deve ser o seguinte:
+
         {
             'password': 'algo',
             'user_type': 'clinic'
         }
+
 * Atenção!!! user_type só pode ser 3 valores: clinic, healthcare_professional, 'patient'
 
 # app.post("/appointment"):
@@ -33,9 +35,17 @@ As rotas da API definidas para essa aplicação são:
 * "Soft" delete de uma consulta, passando o id da consulta é atualizado no banco a coluna deleted_at
 
 # app.post("/appointment/:id/exam")
-* Colocar os exames anexados a uma consulta
+* Colocar um exame anexado a uma consulta
 * Precisa-se passar o id específico da consulta
-* O req.body precisa conter as informações esperadas pela tabela tabela 
+* O req.body precisa conter as informações esperadas pela tabela exam
+* O arquivo deve estar no body na chave específica "selectedFile"
+* Exemplo de body simples:
+
+        {
+            "selectedFile":<File>, //colocar o arquivo aqui
+            "appointment_id":1,
+            "patient_email": email@email.com
+        }
 
 # app.get("/clinic/")
 * Pegar do banco todas as clinicas (id e nome)
